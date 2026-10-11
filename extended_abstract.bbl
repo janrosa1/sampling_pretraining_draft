@@ -1,0 +1,58 @@
+\begin{thebibliography}{9}
+\newcommand{\enquote}[1]{``#1''}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[\protect\citeauthoryear{Ascari and Sbordone}{Ascari and
+  Sbordone}{2014}]{ascari2014macroeconomics}
+\textsc{Ascari, G. and A.~M. Sbordone} (2014): \enquote{The Macroeconomics of
+  Trend Inflation,} \emph{Journal of Economic Literature}, 52, 679--739.
+
+\bibitem[\protect\citeauthoryear{Auclert, Bard{\'o}czy, Rognlie, and
+  Straub}{Auclert et~al.}{2021}]{auclert2021sequence}
+\textsc{Auclert, A., B.~Bard{\'o}czy, M.~Rognlie, and L.~Straub} (2021):
+  \enquote{Using the Sequence-Space {J}acobian to Solve and Estimate
+  Heterogeneous-Agent Models,} \emph{Econometrica}, 89, 2375--2408.
+
+\bibitem[\protect\citeauthoryear{Deuflhard}{Deuflhard}{2004}]{deuflhard2004newton}
+\textsc{Deuflhard, P.} (2004): \emph{Newton Methods for Nonlinear Problems:
+  Affine Invariance and Adaptive Algorithms}, Berlin: Springer.
+
+\bibitem[\protect\citeauthoryear{Ebrahimi~Kahou, Fern{\'a}ndez-Villaverde,
+  G{\'o}mez-Cardona, Perla, and Rosa}{Ebrahimi~Kahou
+  et~al.}{2024}]{kahou2024spooky}
+\textsc{Ebrahimi~Kahou, M., J.~Fern{\'a}ndez-Villaverde, S.~G{\'o}mez-Cardona,
+  J.~Perla, and J.~Rosa} (2024): \enquote{Spooky Boundaries at a Distance:
+  Inductive Bias, Dynamic Models, and Behavioral Macro,} Working Paper 11292,
+  CESifo.
+
+\bibitem[\protect\citeauthoryear{Ebrahimi~Kahou, Perla, and
+  Pleiss}{Ebrahimi~Kahou et~al.}{2026}]{kahou2026kernel}
+\textsc{Ebrahimi~Kahou, M., J.~Perla, and G.~Pleiss} (2026): \enquote{Solving
+  Models of Economic Dynamics with Ridgeless Kernel Regressions,}
+  ArXiv:2406.01898.
+
+\bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Rubio-Ram{\'\i}rez,
+  and Schorfheide}{Fern{\'a}ndez-Villaverde
+  et~al.}{2016}]{fernandez2016solution}
+\textsc{Fern{\'a}ndez-Villaverde, J., J.~F. Rubio-Ram{\'\i}rez, and
+  F.~Schorfheide} (2016): \enquote{Solution and Estimation Methods for {DSGE}
+  Models,} in \emph{Handbook of Macroeconomics}, Elsevier, vol.~2, 527--724.
+
+\bibitem[\protect\citeauthoryear{Judd, Maliar, and Maliar}{Judd
+  et~al.}{2011}]{judd2011numerically}
+\textsc{Judd, K.~L., L.~Maliar, and S.~Maliar} (2011): \enquote{Numerically
+  Stable and Accurate Stochastic Simulation Approaches for Solving Dynamic
+  Economic Models,} \emph{Quantitative Economics}, 2, 173--210.
+
+\bibitem[\protect\citeauthoryear{Kantorovich and Akilov}{Kantorovich and
+  Akilov}{1982}]{kantorovich1982functional}
+\textsc{Kantorovich, L.~V. and G.~P. Akilov} (1982): \emph{Functional
+  Analysis}, Oxford: Pergamon Press, 2nd ed.
+
+\bibitem[\protect\citeauthoryear{Schmitt-Groh{\'e} and Uribe}{Schmitt-Groh{\'e}
+  and Uribe}{2004}]{schmitt2004solving}
+\textsc{Schmitt-Groh{\'e}, S. and M.~Uribe} (2004): \enquote{Solving Dynamic
+  General Equilibrium Models Using a Second-Order Approximation to the Policy
+  Function,} \emph{Journal of Economic Dynamics and Control}, 28, 755--775.
+
+\end{thebibliography}
