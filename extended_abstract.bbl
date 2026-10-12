@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{27}
 \newcommand{\enquote}[1]{``#1''}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
@@ -72,11 +72,21 @@
   \enquote{Financial Frictions and the Wealth Distribution,}
   \emph{Econometrica}, 91, 869--901.
 
+\bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Matthes, Saijo, and
+  Schwartzman}{Fern{\'a}ndez-Villaverde
+  et~al.}{2026{\natexlab{a}}}]{fernandezvillaverde2026production}
+\textsc{Fern{\'a}ndez-Villaverde, J., C.~Matthes, H.~Saijo, and F.~Schwartzman}
+  (2026{\natexlab{a}}): \enquote{Macroeconomic Effects of Production Networks:
+  A Deep Learning Approach,} Working paper, National Bureau of Economic
+  Research.
+
 \bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Nu{\~n}o, and
-  Perla}{Fern{\'a}ndez-Villaverde et~al.}{2026}]{fernandez2026taming}
-\textsc{Fern{\'a}ndez-Villaverde, J., G.~Nu{\~n}o, and J.~Perla} (2026):
-  \enquote{Taming the Curse of Dimensionality: Quantitative Economics with Deep
-  Learning,} \emph{Quantitative Economics}, forthcoming.
+  Perla}{Fern{\'a}ndez-Villaverde
+  et~al.}{2026{\natexlab{b}}}]{fernandez2026taming}
+\textsc{Fern{\'a}ndez-Villaverde, J., G.~Nu{\~n}o, and J.~Perla}
+  (2026{\natexlab{b}}): \enquote{Taming the Curse of Dimensionality:
+  Quantitative Economics with Deep Learning,} \emph{Quantitative Economics},
+  forthcoming.
 
 \bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Rubio-Ram{\'\i}rez,
   and Schorfheide}{Fern{\'a}ndez-Villaverde
@@ -111,6 +121,13 @@
 \textsc{Kase, H., L.~Melosi, and M.~Rottner} (2022): \enquote{Estimating
   Nonlinear Heterogeneous Agent Models with Neural Networks,} Discussion Paper
   17391, Centre for Economic Policy Research.
+
+\bibitem[\protect\citeauthoryear{Kim, Kim, Schaumburg, and Sims}{Kim
+  et~al.}{2008}]{kim2008calculating}
+\textsc{Kim, J., S.~Kim, E.~Schaumburg, and C.~A. Sims} (2008):
+  \enquote{Calculating and Using Second-Order Accurate Solutions of Discrete
+  Time Dynamic Equilibrium Models,} \emph{Journal of Economic Dynamics and
+  Control}, 32, 3397--3414.
 
 \bibitem[\protect\citeauthoryear{Maliar, Maliar, and Winant}{Maliar
   et~al.}{2021}]{maliar2021deep}
