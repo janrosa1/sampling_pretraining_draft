@@ -32,7 +32,21 @@
 \section{Introduction}
 This paper proposes a new method for solving dynamic stochastic general equilibrium (DSGE) models: functional perturbation around the solution of a simplified deterministic model. Standard perturbation methods \citep{schmitt2004solving, fernandez2016solution} approximate policy functions by expanding them around a single point: the deterministic steady state. In contrast, we perturb around the full nonlinear solution of a simplified deterministic model, which can often be computed efficiently and accurately using deep learning or kernel methods, as demonstrated by \citet{kahou2024spooky, kahou2026kernel}. Our approach is related to, but distinct from, the sequence-space methods of \citet{auclert2021sequence}. Whereas sequence-space methods use functional perturbations to approximate equilibrium objects, we use them to solve for the stochastic recursive equilibrium of the entire economy across the state space.
 
-\paragraph{Intuition of the paper}
+\paragraph{Contribution} Our contributions are threefold. First, under regularity
+conditions on the equilibrium in a normed space, the deterministic solution
+is close to the full stochastic solution, with a distance in norm of the
+order of the variance of the largest shock in the model. Second,
+starting from the deterministic solution, we propose a Newton--Kantorovich
+algorithm that converges quickly to the stochastic solution. Third, to demonstrate
+the method, we solve nonlinear New Keynesian models with capital accumulation under
+both Rotemberg and Calvo pricing. The Calvo version with capital is notoriously nonlinear, and to the
+best of our knowledge no global solution of it exists: existing solutions rely
+on perturbation around the steady state, and global methods adopt Rotemberg
+pricing or drop capital.
+
+
+
+\paragraph{Intuition of the paper} 
 \paragraph{Why start from the deterministic solution?} Three properties
 of the deterministic solution, documented by \citet{kahou2024spooky, kahou2026kernel}
 for neural networks and kernel machines, motivate this choice. First, the deterministic solution can be
@@ -51,7 +65,6 @@ problem in DSGE models, and fixes specific to each solution method
 have been proposed, for instance pruning
 in higher-order perturbation methods \citep{andreasen2018pruned}.}
 
-We establish three results. First, under regularity conditions on the equilibrium in a normed space, the deterministic solution is close to the full stochastic solution, with a distance in norm of the order of the variance of the largest shock in the model. Second, the functional perturbation reduces this error to the order of the square of that variance. Third, starting from the perturbed solution, we propose a Newton--Kantorovich algorithm that converges quadratically to the stochastic solution.
 
 We apply the method to a New Keynesian model with capital under both Calvo and Rotemberg pricing. With a high elasticity of substitution, the Calvo pricing block is known to be strongly nonlinear \citep{ascari2014macroeconomics}: the reset-price and price-dispersion recursions have singularities a few percentage points above the inflation target. We demonstrate that the Newton--Kantorovich iteration delivers stochastic policy functions whose equilibrium residuals are close to numerical zero along impulse responses and simulated paths, even in this case.
 
