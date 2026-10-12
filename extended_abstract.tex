@@ -30,16 +30,23 @@
 \maketitle
 
 \section{Introduction}
-This paper proposes a new method for solving dynamic stochastic general 
-equilibrium (DSGE) models: functional perturbation around the solution of 
-a simplified deterministic model. Standard perturbation methods 
-\citep{schmitt2004solving, fernandez2016solution} approximate 
-policy functions by expanding them around a single point: 
-the deterministic steady state. In contrast, we perturb around the 
-full nonlinear solution of a simplified deterministic model, which can 
-often be computed efficiently and accurately using deep 
-learning or kernel methods, as demonstrated by 
-\citet{kahou2024spooky, kahou2026kernel}. 
+This paper proposes a new method for solving nonlinear dynamic stochastic general
+equilibrium (DSGE) models that starts from the full solution of
+a simplified deterministic model and corrects it for risk in function space.
+We focus on New Keynesian models, but the method applies to any model whose
+deterministic version can be solved accurately, such as open-economy and
+international macro models or production-network models. The method has
+two steps. First, we solve the deterministic, i.e., perfect-foresight, version
+of the model, which can often be done efficiently and accurately with deep
+learning or kernel methods \citep{kahou2024spooky, kahou2026kernel}. Second,
+this solution serves as the initial point in function space for solving the
+full stochastic version of the model. The gap between the deterministic and
+the stochastic solution is closed by a
+Newton--Kantorovich iteration on the stochastic equilibrium conditions, the
+function-space analogue of Newton's method for a system of equations. Newton's
+method is fast when the initial guess is close to the solution, and the
+deterministic solution is close, since it misses only the effect of risk, which
+is of the order of the variance of the shocks.
 
 \paragraph{Contribution} Our contributions are threefold. First, under regularity
 conditions on the equilibrium in a normed space, the deterministic solution
@@ -88,12 +95,19 @@ have been proposed, for instance pruning
 in higher-order perturbation methods \citep{andreasen2018pruned}.}
 
 
-\paragraph{Related works} Our approach is related 
-to, but distinct from, the sequence-space methods 
-of \citet{auclert2021sequence}. Whereas sequence-space 
-methods use functional perturbations to approximate equilibrium objects,
- we use them to solve for the stochastic recursive equilibrium of 
- the entire economy across the state space.
+\paragraph{Related works} Standard perturbation methods
+\citep{schmitt2004solving, fernandez2016solution} expand policy functions
+around a single point, the deterministic steady state, and their accuracy
+degrades as the economy moves away from it, which is precisely the case in the
+highly nonlinear models we study. We instead start from the full nonlinear
+solution of the deterministic model, so our starting point is accurate over
+the whole state space. Our approach is also related
+to, but distinct from, the sequence-space methods
+of \citet{auclert2021sequence}. Whereas sequence-space
+methods perturb equilibrium objects in sequence space around a deterministic path,
+we correct the deterministic solution for risk over the whole state space and obtain
+the stochastic recursive equilibrium of the entire economy. Deep learning people to cite later, 
+Marlon, Simon, Yucheng, Lilia, Jacob, Fill, will, Jeopke, Galo.  
 
 \paragraph{Application} We apply the method to a New Keynesian model with 
 capital under both Calvo and Rotemberg pricing. With a high elasticity of 
