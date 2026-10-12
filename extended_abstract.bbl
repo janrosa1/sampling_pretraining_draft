@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{16}
 \newcommand{\enquote}[1]{``#1''}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
@@ -38,11 +38,23 @@
   Inductive Bias, Dynamic Models, and Behavioral Macro,} Working Paper 11292,
   CESifo.
 
+\bibitem[\protect\citeauthoryear{Ebrahimi~Kahou, Fern{\'a}ndez-Villaverde,
+  Perla, and Sood}{Ebrahimi~Kahou et~al.}{2021}]{kahou2021exploiting}
+\textsc{Ebrahimi~Kahou, M., J.~Fern{\'a}ndez-Villaverde, J.~Perla, and A.~Sood}
+  (2021): \enquote{Exploiting Symmetry in High-Dimensional Dynamic
+  Programming,} Working Paper 28981, National Bureau of Economic Research.
+
 \bibitem[\protect\citeauthoryear{Ebrahimi~Kahou, Perla, and
   Pleiss}{Ebrahimi~Kahou et~al.}{2026}]{kahou2026kernel}
 \textsc{Ebrahimi~Kahou, M., J.~Perla, and G.~Pleiss} (2026): \enquote{Solving
   Models of Economic Dynamics with Ridgeless Kernel Regressions,}
   ArXiv:2406.01898.
+
+\bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Nu{\~n}o, and
+  Perla}{Fern{\'a}ndez-Villaverde et~al.}{2026}]{fernandez2026taming}
+\textsc{Fern{\'a}ndez-Villaverde, J., G.~Nu{\~n}o, and J.~Perla} (2026):
+  \enquote{Taming the Curse of Dimensionality: Quantitative Economics with Deep
+  Learning,} \emph{Quantitative Economics}, forthcoming.
 
 \bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Rubio-Ram{\'\i}rez,
   and Schorfheide}{Fern{\'a}ndez-Villaverde

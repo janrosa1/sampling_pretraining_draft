@@ -30,7 +30,21 @@
 \maketitle
 
 \section{Introduction}
-This paper proposes a new method for solving dynamic stochastic general equilibrium (DSGE) models: functional perturbation around the solution of a simplified deterministic model. Standard perturbation methods \citep{schmitt2004solving, fernandez2016solution} approximate policy functions by expanding them around a single point: the deterministic steady state. In contrast, we perturb around the full nonlinear solution of a simplified deterministic model, which can often be computed efficiently and accurately using deep learning or kernel methods, as demonstrated by \citet{kahou2024spooky, kahou2026kernel}. Our approach is related to, but distinct from, the sequence-space methods of \citet{auclert2021sequence}. Whereas sequence-space methods use functional perturbations to approximate equilibrium objects, we use them to solve for the stochastic recursive equilibrium of the entire economy across the state space.
+This paper proposes a new method for solving dynamic stochastic general 
+equilibrium (DSGE) models: functional perturbation around the solution of 
+a simplified deterministic model. Standard perturbation methods 
+\citep{schmitt2004solving, fernandez2016solution} approximate 
+policy functions by expanding them around a single point: 
+the deterministic steady state. In contrast, we perturb around the 
+full nonlinear solution of a simplified deterministic model, which can 
+often be computed efficiently and accurately using deep 
+learning or kernel methods, as demonstrated by 
+\citet{kahou2024spooky, kahou2026kernel}. Our approach is related 
+to, but distinct from, the sequence-space methods 
+of \citet{auclert2021sequence}. Whereas sequence-space 
+methods use functional perturbations to approximate equilibrium objects,
+ we use them to solve for the stochastic recursive equilibrium of 
+ the entire economy across the state space.
 
 \paragraph{Contribution} Our contributions are threefold. First, under regularity
 conditions on the equilibrium in a normed space, the deterministic solution
@@ -46,7 +60,20 @@ pricing or drop capital.
 
 
 
-\paragraph{Intuition of the paper} 
+\paragraph{Intuition of the paper} The first step of our approach is to
+learn the solution of the deterministic problem. This solution already contains
+most of the information about the solution of the stochastic problem: the only
+missing element is the effect of uncertainty. The second step learns this missing
+element, which explains the fast convergence of our method.
+The deterministic solution also provides something subtler.
+Sampling the state space is challenging even in moderate
+dimension \citep{kahou2021exploiting, fernandez2026taming}, and more so in highly nonlinear problems. Simulating the
+deterministic solution under the calibrated shocks delivers a region of the state space that is close, although not identical, to
+the region the stochastic economy visits.
+This also contributes to the robustness and efficiency of our method.
+
+
+
 \paragraph{Why start from the deterministic solution?} Three properties
 of the deterministic solution, documented by \citet{kahou2024spooky, kahou2026kernel}
 for neural networks and kernel machines, motivate this choice. First, the deterministic solution can be
