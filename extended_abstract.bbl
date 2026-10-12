@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{25}
 \newcommand{\enquote}[1]{``#1''}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
@@ -26,9 +26,25 @@
   in Economic Development,} \emph{Quarterly Journal of Economics}, 105,
   501--526.
 
+\bibitem[\protect\citeauthoryear{Azinovic, Gaegauf, and Scheidegger}{Azinovic
+  et~al.}{2022}]{azinovic2022deep}
+\textsc{Azinovic, M., L.~Gaegauf, and S.~Scheidegger} (2022): \enquote{Deep
+  Equilibrium Nets,} \emph{International Economic Review}, 63, 1471--1525.
+
+\bibitem[\protect\citeauthoryear{Barnett, Brock, Hansen, Hu, and Huang}{Barnett
+  et~al.}{2023}]{barnett2023deep}
+\textsc{Barnett, M., W.~Brock, L.~P. Hansen, R.~Hu, and J.~Huang} (2023):
+  \enquote{A Deep Learning Analysis of Climate Change, Innovation, and
+  Uncertainty,} ArXiv:2310.13200.
+
 \bibitem[\protect\citeauthoryear{Deuflhard}{Deuflhard}{2004}]{deuflhard2004newton}
 \textsc{Deuflhard, P.} (2004): \emph{Newton Methods for Nonlinear Problems:
   Affine Invariance and Adaptive Algorithms}, Berlin: Springer.
+
+\bibitem[\protect\citeauthoryear{Duarte, Duarte, and Silva}{Duarte
+  et~al.}{2024}]{duarte2024machine}
+\textsc{Duarte, V., D.~Duarte, and D.~Silva} (2024): \enquote{Machine Learning
+  for Continuous-Time Finance,} Working paper, CESifo.
 
 \bibitem[\protect\citeauthoryear{Ebrahimi~Kahou, Fern{\'a}ndez-Villaverde,
   G{\'o}mez-Cardona, Perla, and Rosa}{Ebrahimi~Kahou
@@ -50,6 +66,12 @@
   Models of Economic Dynamics with Ridgeless Kernel Regressions,}
   ArXiv:2406.01898.
 
+\bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Hurtado, and
+  Nu{\~n}o}{Fern{\'a}ndez-Villaverde et~al.}{2023}]{fernandez2023financial}
+\textsc{Fern{\'a}ndez-Villaverde, J., S.~Hurtado, and G.~Nu{\~n}o} (2023):
+  \enquote{Financial Frictions and the Wealth Distribution,}
+  \emph{Econometrica}, 91, 869--901.
+
 \bibitem[\protect\citeauthoryear{Fern{\'a}ndez-Villaverde, Nu{\~n}o, and
   Perla}{Fern{\'a}ndez-Villaverde et~al.}{2026}]{fernandez2026taming}
 \textsc{Fern{\'a}ndez-Villaverde, J., G.~Nu{\~n}o, and J.~Perla} (2026):
@@ -63,16 +85,38 @@
   F.~Schorfheide} (2016): \enquote{Solution and Estimation Methods for {DSGE}
   Models,} in \emph{Handbook of Macroeconomics}, Elsevier, vol.~2, 527--724.
 
+\bibitem[\protect\citeauthoryear{Han, Yang, and E}{Han
+  et~al.}{2026}]{han2026deepham}
+\textsc{Han, J., Y.~Yang, and W.~E} (2026): \enquote{{DeepHAM}: A Global
+  Solution Method for Heterogeneous Agent Models with Aggregate Shocks,}
+  \emph{Quantitative Economics}, 17, 297--341.
+
 \bibitem[\protect\citeauthoryear{Judd, Maliar, and Maliar}{Judd
   et~al.}{2011}]{judd2011numerically}
 \textsc{Judd, K.~L., L.~Maliar, and S.~Maliar} (2011): \enquote{Numerically
   Stable and Accurate Stochastic Simulation Approaches for Solving Dynamic
   Economic Models,} \emph{Quantitative Economics}, 2, 173--210.
 
+\bibitem[\protect\citeauthoryear{Jungerman}{Jungerman}{2023}]{jungerman2023dynamic}
+\textsc{Jungerman, W.} (2023): \enquote{Dynamic Monopsony and Human Capital,}
+  Working Paper.
+
 \bibitem[\protect\citeauthoryear{Kantorovich and Akilov}{Kantorovich and
   Akilov}{1982}]{kantorovich1982functional}
 \textsc{Kantorovich, L.~V. and G.~P. Akilov} (1982): \emph{Functional
   Analysis}, Oxford: Pergamon Press, 2nd ed.
+
+\bibitem[\protect\citeauthoryear{Kase, Melosi, and Rottner}{Kase
+  et~al.}{2022}]{kase2022estimating}
+\textsc{Kase, H., L.~Melosi, and M.~Rottner} (2022): \enquote{Estimating
+  Nonlinear Heterogeneous Agent Models with Neural Networks,} Discussion Paper
+  17391, Centre for Economic Policy Research.
+
+\bibitem[\protect\citeauthoryear{Maliar, Maliar, and Winant}{Maliar
+  et~al.}{2021}]{maliar2021deep}
+\textsc{Maliar, L., S.~Maliar, and P.~Winant} (2021): \enquote{Deep Learning
+  for Solving Dynamic Economic Models,} \emph{Journal of Monetary Economics},
+  122, 76--101.
 
 \bibitem[\protect\citeauthoryear{Mendoza}{Mendoza}{2010}]{mendoza2010sudden}
 \textsc{Mendoza, E.~G.} (2010): \enquote{Sudden Stops, Financial Crises, and
@@ -84,6 +128,11 @@
   Fast Global Method for Solving Models with Two Endogenous States \&
   Occasionally Binding Constraints,} \emph{Review of Economic Dynamics}, 37,
   81--102.
+
+\bibitem[\protect\citeauthoryear{Payne, Rebei, and Yang}{Payne
+  et~al.}{2024}]{payne2024deep}
+\textsc{Payne, J., A.~Rebei, and Y.~Yang} (2024): \enquote{Deep Learning for
+  Search and Matching Models,} SSRN 4768566.
 
 \bibitem[\protect\citeauthoryear{Schmitt-Groh{\'e} and Uribe}{Schmitt-Groh{\'e}
   and Uribe}{2004}]{schmitt2004solving}

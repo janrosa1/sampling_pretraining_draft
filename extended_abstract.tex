@@ -95,19 +95,31 @@ have been proposed, for instance pruning
 in higher-order perturbation methods \citep{andreasen2018pruned}.}
 
 
-\paragraph{Related works} Standard perturbation methods
-\citep{schmitt2004solving, fernandez2016solution} expand policy functions
-around a single point, the deterministic steady state, and their accuracy
-degrades as the economy moves away from it, which is precisely the case in the
-highly nonlinear models we study. We instead start from the full nonlinear
-solution of the deterministic model, so our starting point is accurate over
-the whole state space. Our approach is also related
-to, but distinct from, the sequence-space methods
-of \citet{auclert2021sequence}. Whereas sequence-space
-methods perturb equilibrium objects in sequence space around a deterministic path,
-we correct the deterministic solution for risk over the whole state space and obtain
-the stochastic recursive equilibrium of the entire economy. Deep learning people to cite later, 
-Marlon, Simon, Yucheng, Lilia, Jacob, Fill, will, Jeopke, Galo.  
+\paragraph{Related works} Our work is related to several strands of the
+literature. The first uses modern machine learning methods, in particular deep
+learning, to solve dynamic models in economics
+\citep{maliar2021deep, azinovic2022deep, kahou2021exploiting, han2026deepham,
+kase2022estimating, barnett2023deep, fernandez2023financial,
+jungerman2023dynamic, duarte2024machine, payne2024deep}. These methods train a
+neural network to minimize the residuals of the equilibrium conditions on a
+sample of states, starting from a random initialization and sampling the state
+space either on a grid or by simulating the current policy. We differ in two
+ways. First, our starting point is not random but the deterministic solution,
+which already knows most of the economics of the problem and leaves only the
+effect of risk to be learned. Second, the deterministic solution tells us where
+to sample, since simulating it under the calibrated shocks delivers a region
+close to the one the stochastic economy visits. This matters in highly
+nonlinear models. In our experience, a standard deep learning approach with
+adaptive sampling fails in the New Keynesian model with Calvo pricing and
+capital. The second strand is the perturbation literature. Standard
+perturbation methods \citep{schmitt2004solving, fernandez2016solution} expand
+policy functions around a single point, the deterministic steady state, and
+their accuracy degrades as the economy moves away from it, which is precisely
+the case in the highly nonlinear models we study. The third is the
+sequence-space approach of \citet{auclert2021sequence}. Whereas sequence-space
+methods perturb equilibrium objects in sequence space around a deterministic
+path, we correct the deterministic solution for risk over the whole state space
+and obtain the stochastic recursive equilibrium of the entire economy.
 
 \paragraph{Application} We apply the method to a New Keynesian model with 
 capital under both Calvo and Rotemberg pricing. With a high elasticity of 
