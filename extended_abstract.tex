@@ -20,7 +20,7 @@
 
 \newtheorem{proposition}{Proposition}
 
-\title{Perfect Foresight Is Almost Enough:\\ Risk Corrections in Function Space for Nonlinear New Keynesian Models\\[0.6em] {\large Extended abstract}}
+\title{Perfect Foresight Is Almost Enough:\\ Risk Corrections in Function Space for Nonlinear New Keynesian Models\\[0.6em] {\large\bfseries Extended abstract}}
 \author{Jan Rosa\thanks{OECD, \texttt{jan.rosa@oecd.org}. The opinions expressed and arguments employed in this paper are solely those of the authors and do not necessarily reflect the official views of the OECD or of its member states.}
 \and Mahdi Ebrahimi Kahou\thanks{Bowdoin College.}
 \and Jes\'us Fern\'andez-Villaverde\thanks{University of Pennsylvania.}}
@@ -39,12 +39,7 @@ the deterministic steady state. In contrast, we perturb around the
 full nonlinear solution of a simplified deterministic model, which can 
 often be computed efficiently and accurately using deep 
 learning or kernel methods, as demonstrated by 
-\citet{kahou2024spooky, kahou2026kernel}. Our approach is related 
-to, but distinct from, the sequence-space methods 
-of \citet{auclert2021sequence}. Whereas sequence-space 
-methods use functional perturbations to approximate equilibrium objects,
- we use them to solve for the stochastic recursive equilibrium of 
- the entire economy across the state space.
+\citet{kahou2024spooky, kahou2026kernel}. 
 
 \paragraph{Contribution} Our contributions are threefold. First, under regularity
 conditions on the equilibrium in a normed space, the deterministic solution
@@ -93,7 +88,23 @@ have been proposed, for instance pruning
 in higher-order perturbation methods \citep{andreasen2018pruned}.}
 
 
-We apply the method to a New Keynesian model with capital under both Calvo and Rotemberg pricing. With a high elasticity of substitution, the Calvo pricing block is known to be strongly nonlinear \citep{ascari2014macroeconomics}: the reset-price and price-dispersion recursions have singularities a few percentage points above the inflation target. We demonstrate that the Newton--Kantorovich iteration delivers stochastic policy functions whose equilibrium residuals are close to numerical zero along impulse responses and simulated paths, even in this case.
+\paragraph{Related works} Our approach is related 
+to, but distinct from, the sequence-space methods 
+of \citet{auclert2021sequence}. Whereas sequence-space 
+methods use functional perturbations to approximate equilibrium objects,
+ we use them to solve for the stochastic recursive equilibrium of 
+ the entire economy across the state space.
+
+\paragraph{Application} We apply the method to a New Keynesian model with 
+capital under both Calvo and Rotemberg pricing. With a high elasticity of 
+substitution, the Calvo pricing block is known to be strongly nonlinear 
+\citep{ascari2014macroeconomics}: the reset-price and price-dispersion 
+recursions have singularities a few percentage points above the inflation target.
+We demonstrate that the Newton--Kantorovich iteration delivers stochastic 
+policy functions whose equilibrium residuals are close to numerical zero 
+along impulse responses and simulated paths, even in this case.
+
+
 
 \section{Model and parametrization}
 
