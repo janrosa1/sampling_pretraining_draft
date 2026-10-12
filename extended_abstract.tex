@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{natbib}
 \usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true, citecolor=blue, linkcolor=black, urlcolor=blue]{hyperref}
 \usepackage{enumitem}
 \setlist{nosep}
 \emergencystretch=1.5em
@@ -31,6 +31,25 @@
 
 \section{Introduction}
 This paper proposes a new method for solving dynamic stochastic general equilibrium (DSGE) models: functional perturbation around the solution of a simplified deterministic model. Standard perturbation methods \citep{schmitt2004solving, fernandez2016solution} approximate policy functions by expanding them around a single point: the deterministic steady state. In contrast, we perturb around the full nonlinear solution of a simplified deterministic model, which can often be computed efficiently and accurately using deep learning or kernel methods, as demonstrated by \citet{kahou2024spooky, kahou2026kernel}. Our approach is related to, but distinct from, the sequence-space methods of \citet{auclert2021sequence}. Whereas sequence-space methods use functional perturbations to approximate equilibrium objects, we use them to solve for the stochastic recursive equilibrium of the entire economy across the state space.
+
+\paragraph{Intuition of the paper}
+\paragraph{Why start from the deterministic solution?} There are
+three reasons, as established by \citet{kahou2024spooky, kahou2026kernel}
+with neural networks and kernel machines. First, the deterministic solution can be
+computed accurately and cheaply, because the deterministic
+problem is the simpler one. Second, through implicit or
+explicit regularization of the solution paths, the solution automatically satisfies
+the transversality and no-Ponzi conditions. This is crucial for
+problems with hysteresis, which are common in growth
+models \citep{skiba1978optimal, azariadis1990threshold}
+and in open-economy models \citep{mendoza2010sudden, mendoza2020fipit}.
+Third, because the transversality conditions are what make the equilibrium
+path stable, a solution that satisfies them is stable and errors do not accumulate along
+the dynamics. Error accumulation is all the more damaging in highly
+nonlinear models, such as the ones we study in this paper.\footnote{This is a well-known problem in DSGE models,
+and it has been addressed in several ways, for instance by pruning
+in higher-order perturbation
+methods \citep{andreasen2018pruned}.}
 
 We establish three results. First, under regularity conditions on the equilibrium in a normed space, the deterministic solution is close to the full stochastic solution, with a distance in norm of the order of the variance of the largest shock in the model. Second, the functional perturbation reduces this error to the order of the square of that variance. Third, starting from the perturbed solution, we propose a Newton--Kantorovich algorithm that converges quadratically to the stochastic solution.
 
