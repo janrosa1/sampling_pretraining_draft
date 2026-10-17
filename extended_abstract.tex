@@ -76,7 +76,7 @@ This also contributes to the robustness and efficiency of our method.
 
 
 
-\paragraph{Why start from the deterministic solution?} Three properties of the deterministic solution, documented by \citet{kahou2024spooky, kahou2026kernel} for neural networks and kernel machines, motivate this choice. First, the deterministic solution can be computed accurately and at low computational cost, as the deterministic problem is simpler, particularly when formulated in sequential form: finding the trajectory of the economy from given initial conditions. This sequential formulation also enables efficient, grid-free sampling by collecting the states visited along the trajectory.  Second, through implicit or explicit regularization of solution paths, the resulting solution automatically satisfies the transversality and no-Ponzi conditions. This is particularly important for problems with hysteresis, which arise frequently in growth models \citep{skiba1978optimal, azariadis1990threshold} and open-economy models \citep{mendoza2010sudden, mendoza2020fipit}. Third, because transversality conditions ensure the stability of equilibrium paths, a solution satisfying these conditions is stable, preventing errors from accumulating along the dynamics. Error accumulation is particularly problematic in highly nonlinear models, such as those studied in this paper.\footnote{This is a well-known problem in DSGE models, and solutions specific to individual numerical methods have been proposed, such as pruning in higher-order perturbation methods \citep{kim2008calculating, andreasen2018pruned}.}
+\paragraph{Why start from the deterministic solution?} Three properties of the deterministic solution motivate this choice. First, the deterministic solution can be computed accurately and at low computational cost, as the deterministic problem is simpler, particularly when formulated in sequential form: finding the trajectory of the economy from given initial conditions, as documented by \citet{kahou2024spooky, kahou2026kernel} using neural networks and kernel machines as the approximating functions.  Second, through implicit or explicit regularization of solution paths, the resulting solution automatically satisfies the transversality and no-Ponzi conditions. This is particularly important for problems with hysteresis, which arise frequently in growth models \citep{skiba1978optimal, azariadis1990threshold} and open-economy models \citep{mendoza2010sudden, mendoza2020fipit}. Third, because transversality conditions ensure the stability of equilibrium paths, a solution satisfying these conditions is stable, preventing errors from accumulating along the dynamics. Error accumulation is particularly problematic in highly nonlinear models, such as those studied in this paper.\footnote{This is a well-known problem in DSGE models, and solutions specific to individual numerical methods have been proposed, such as pruning in higher-order perturbation methods \citep{kim2008calculating, andreasen2018pruned}.}
 
 
 \paragraph{Related works} Our work is related to several strands of the
@@ -90,13 +90,13 @@ step. Closest to us, \citet{ajevskis2017semiglobal} constructs semi-global
 solutions as expansions in the volatility parameter around deterministic
 trajectories. Sequence-space methods
 \citep{auclert2021sequence} likewise perturb equilibrium objects around a
-deterministic path. All three approaches share our anchor but deliver
-path-based objects: solutions attached to a particular initial condition and
+deterministic path. All three approaches share our starting point, the deterministic solution,
+but deliver path-based objects: solutions attached to a particular initial condition and
 shock history, to be recomputed when either changes, and accurate to the order
 at which the expansion is truncated. In contrast, we correct the deterministic
-solution for risk over the whole state space and iterate to the exact
+solution for risk over the whole relevant state space and iterate to the exact
 stochastic solution: the output is the recursive equilibrium of the entire
-economy, computed once and valid for every shock history
+economy, computed once and valid for every shock history.
 
 This paper is also related to the broader perturbation literature. Standard
 perturbation methods \citep{schmitt2004solving, fernandez2016solution} expand
@@ -108,15 +108,9 @@ develop asymptotic expansions in the volatility parameter,
 \citet{jin2002perturbation} establish the local validity of perturbation
 solutions via implicit-function arguments, \citet{kim2008calculating} analyze
 the accuracy of second-order approximations, and \citet{lombardo2018theory}
-prove convergence of the resulting series expansions. Our first contribution belongs to this lineage but differs in the anchor and
-in the setting: we expand around the globally nonlinear deterministic solution
-rather than a steady state, and we establish the result for the system the
-method actually solves, the equilibrium conditions imposed on the sampled
-states, where the distance between the deterministic and stochastic
-solutions is of the order of the shock variance and the leading correction is
-identified and computable by a single linear solve. Accuracy away from the
-sample is then assessed by out-of-sample residual diagnostics rather than
-asserted.
+prove convergence of the resulting series expansions. Our first contribution belongs to this lineage but differs in the point of
+expansion and in the setting: we expand around the globally nonlinear
+deterministic solution rather than a steady state. 
 
 Lastly, our paper is related to the literature that uses modern machine
 learning methods, in particular deep learning, to solve dynamic models in
