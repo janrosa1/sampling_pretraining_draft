@@ -32,7 +32,7 @@
 \section{Introduction}
 This paper proposes a new method for solving nonlinear dynamic stochastic general
 equilibrium (DSGE) models that starts from the full solution of
-a simplified deterministic model and corrects it for risk in function space.
+a simplified deterministic model and corrects it for stochastic risk in function space.
 We focus on New Keynesian models, but the method applies to any model whose
 deterministic version can be solved accurately, such as open-economy and
 international macro models or production-network models \citep{fernandezvillaverde2026production}. The method has
@@ -48,7 +48,7 @@ method is fast when the initial guess is close to the solution, and the
 deterministic solution is close, since it misses only the effect of risk, which
 is of the order of the variance of the shocks.
 
-\paragraph{Contribution} Our contributions are threefold. First, under regularity
+\paragraph{Contribution} Our contributions are threefold. First, we show that under regularity
 conditions on the equilibrium in a normed space, the deterministic solution
 is close to the full stochastic solution, with a distance in norm of the
 order of the variance of the largest shock in the model. Second,
@@ -65,8 +65,8 @@ pricing or drop capital.
 \paragraph{Intuition of the paper} The first step of our approach is to
 learn the solution of the deterministic problem. This solution already contains
 most of the information about the solution of the stochastic problem: the only
-missing element is the effect of uncertainty. The second step learns this missing
-element, which explains the fast convergence of our method.
+missing element is the effect of stochastic shocks and uncertainty. The second step learns this missing
+element, which explains the fast convergence of our method. 
 The deterministic solution also provides something subtler.
 Sampling the state space is challenging even in moderate
 dimension \citep{kahou2021exploiting, fernandez2026taming}, and more so in highly nonlinear problems. Simulating the
@@ -76,50 +76,66 @@ This also contributes to the robustness and efficiency of our method.
 
 
 
-\paragraph{Why start from the deterministic solution?} Three properties
-of the deterministic solution, documented by \citet{kahou2024spooky, kahou2026kernel}
-for neural networks and kernel machines, motivate this choice. First, the deterministic solution can be
-computed accurately and cheaply, because the deterministic
-problem is the simpler one. Second, through implicit or
-explicit regularization of the solution paths, the solution automatically satisfies
-the transversality and no-Ponzi conditions. This is crucial for
-problems with hysteresis, which are common in growth
-models \citep{skiba1978optimal, azariadis1990threshold}
-and in open-economy models \citep{mendoza2010sudden, mendoza2020fipit}.
-Third, because the transversality conditions are what make the equilibrium
-path stable, a solution that satisfies them is stable and errors do not accumulate along
-the dynamics. This error accumulation problem is more severe in highly
-nonlinear models, such as the ones we study in this paper.\footnote{This is a well-known
-problem in DSGE models, and fixes specific to each solution method
-have been proposed, for instance pruning
-in higher-order perturbation methods \citep{kim2008calculating, andreasen2018pruned}.}
+\paragraph{Why start from the deterministic solution?} Three properties of the deterministic solution, documented by \citet{kahou2024spooky, kahou2026kernel} for neural networks and kernel machines, motivate this choice. First, the deterministic solution can be computed accurately and at low computational cost, as the deterministic problem is simpler, particularly when formulated in sequential form: finding the trajectory of the economy from given initial conditions. This sequential formulation also enables efficient, grid-free sampling by collecting the states visited along the trajectory.  Second, through implicit or explicit regularization of solution paths, the resulting solution automatically satisfies the transversality and no-Ponzi conditions. This is particularly important for problems with hysteresis, which arise frequently in growth models \citep{skiba1978optimal, azariadis1990threshold} and open-economy models \citep{mendoza2010sudden, mendoza2020fipit}. Third, because transversality conditions ensure the stability of equilibrium paths, a solution satisfying these conditions is stable, preventing errors from accumulating along the dynamics. Error accumulation is particularly problematic in highly nonlinear models, such as those studied in this paper.\footnote{This is a well-known problem in DSGE models, and solutions specific to individual numerical methods have been proposed, such as pruning in higher-order perturbation methods \citep{kim2008calculating, andreasen2018pruned}.}
 
 
 \paragraph{Related works} Our work is related to several strands of the
-literature. The first uses modern machine learning methods, in particular deep
-learning, to solve dynamic models in economics
-\citep{maliar2021deep, azinovic2022deep, kahou2021exploiting, han2026deepham,
-kase2022estimating, barnett2023deep, fernandez2023financial,
+literature. First, the idea of exploiting the deterministic solution to solve
+stochastic models was introduced by \citet{boppart2018exploiting}, who compute
+first-order responses to aggregate shocks from a single perfect-foresight
+transition path. Their approximation is linear in the size of aggregate shocks
+and therefore certainty-equivalent: the effects of risk are absent by
+construction, whereas capturing them is precisely the object of our second
+step. Closest to us, \citet{ajevskis2017semiglobal} constructs semi-global
+solutions as expansions in the volatility parameter around deterministic
+trajectories. Sequence-space methods
+\citep{auclert2021sequence} likewise perturb equilibrium objects around a
+deterministic path. All three approaches share our anchor but deliver
+path-based objects: solutions attached to a particular initial condition and
+shock history, to be recomputed when either changes, and accurate to the order
+at which the expansion is truncated. In contrast, we correct the deterministic
+solution for risk over the whole state space and iterate to the exact
+stochastic solution: the output is the recursive equilibrium of the entire
+economy, computed once and valid for every shock history
+
+This paper is also related to the broader perturbation literature. Standard
+perturbation methods \citep{schmitt2004solving, fernandez2016solution} expand
+policy functions around a single point, the deterministic steady state, and
+their accuracy degrades as the economy moves away from it, which is precisely
+the case in the highly nonlinear models we study. A theoretical branch of this
+literature studies when such expansions are valid: \citet{judd2001asymptotic}
+develop asymptotic expansions in the volatility parameter,
+\citet{jin2002perturbation} establish the local validity of perturbation
+solutions via implicit-function arguments, \citet{kim2008calculating} analyze
+the accuracy of second-order approximations, and \citet{lombardo2018theory}
+prove convergence of the resulting series expansions. Our first contribution belongs to this lineage but differs in the anchor and
+in the setting: we expand around the globally nonlinear deterministic solution
+rather than a steady state, and we establish the result for the system the
+method actually solves, the equilibrium conditions imposed on the sampled
+states, where the distance between the deterministic and stochastic
+solutions is of the order of the shock variance and the leading correction is
+identified and computable by a single linear solve. Accuracy away from the
+sample is then assessed by out-of-sample residual diagnostics rather than
+asserted.
+
+Lastly, our paper is related to the literature that uses modern machine
+learning methods, in particular deep learning, to solve dynamic models in
+economics \citep{maliar2021deep, azinovic2022deep, kahou2021exploiting,
+han2026deepham, kase2022estimating, barnett2023deep, fernandez2023financial,
 jungerman2023dynamic, duarte2024machine, payne2024deep}. These methods train a
 neural network to minimize the residuals of the equilibrium conditions on a
 sample of states, starting from a random initialization and sampling the state
 space either on a grid or by simulating the current policy. We differ in two
 ways. First, our starting point is not random but the deterministic solution,
-which already knows most of the economics of the problem and leaves only the
-effect of risk to be learned. Second, the deterministic solution tells us where
-to sample, since simulating it under the calibrated shocks delivers a region
-close to the one the stochastic economy visits. This matters in highly
-nonlinear models. In our experience, a standard deep learning approach with
+which already contains most of the economics of the problem and leaves only
+the effect of risk to be learned. Second, the deterministic solution tells us
+where to sample, since simulating it under the calibrated shocks delivers a
+region close to the one the stochastic economy visits. This matters in highly
+nonlinear models: in our experience, a standard deep learning approach with
 adaptive sampling fails in the New Keynesian model with Calvo pricing and
-capital accumulation. The second strand is the perturbation literature. Standard
-perturbation methods \citep{schmitt2004solving, fernandez2016solution} expand
-policy functions around a single point, the deterministic steady state, and
-their accuracy degrades as the economy moves away from it, which is precisely
-the case in the highly nonlinear models we study. The third is the
-sequence-space approach of \citet{auclert2021sequence}. Whereas sequence-space
-methods perturb equilibrium objects in sequence space around a deterministic
-path, we correct the deterministic solution for risk over the whole state space
-and obtain the stochastic recursive equilibrium of the entire economy.
+capital accumulation.
+
+
 
 \paragraph{Application} We apply the method to a New Keynesian model with 
 capital under both Calvo and Rotemberg pricing. With a high elasticity of 
@@ -216,16 +232,54 @@ $\sigma_{m}$ & monetary innovation std.\ dev. & $0.001$\\
 \label{tab:calibration}
 \end{table}
 
-\subsection{The Calvo singularities}
+\subsection{The Calvo singularities and the precision they demand}
 \label{sec:singularities}
 
-The Calvo block is not a smooth deformation of the flexible-price economy: three of its objects have poles a few percentage points above the target.
+The Calvo block is not a smooth deformation of the flexible-price economy: three of its objects have singularities a few percentage points above the target.
 \begin{itemize}[leftmargin=1.5em]
 \item \emph{Reset price.} The price index gives $\Pi^*_t = \big( (1 - \theta \Pi_t^{\epsilon-1})/(1-\theta) \big)^{1/(1-\epsilon)}$, which diverges at $\bar\Pi = \theta^{-1/(\epsilon-1)}$, the inflation rate at which the non-resetting firms alone exhaust the price index. Its elasticity with respect to inflation, $\theta \Pi^{\epsilon-1}/(1 - \theta \Pi^{\epsilon-1})$, is already $5.1$ at the target and grows without bound.
-\item \emph{Marginal-cost sum.} At constant inflation $g^1 = \lambda\, \mathrm{mc}\, y / (1 - \beta\theta \Pi^{\epsilon})$, with a pole at $\tilde\Pi = (\beta\theta)^{-1/\epsilon}$. The elasticity of $g^1$ with respect to inflation at the target is $\epsilon \beta\theta \Pi^{\epsilon} / (1 - \beta\theta\Pi^{\epsilon}) \approx 50$: a one-percent error in the inflation policy moves the $g^1$ condition by fifty percent, so the forward-looking pricing conditions amplify, rather than damp, errors in inflation.
+\item \emph{Marginal-cost sum.} At constant inflation $g^1 = \lambda\, \mathrm{mc}\, y / (1 - \beta\theta \Pi^{\epsilon})$, with a pole at $\tilde\Pi = (\beta\theta)^{-1/\epsilon}$. The elasticity of $g^1$ with respect to inflation at the target is $\epsilon \beta\theta \Pi^{\epsilon} / (1 - \beta\theta\Pi^{\epsilon}) \approx 50$: a 1\% error in the inflation policy moves the $g^1$ condition by 50\%, so the forward-looking pricing conditions amplify, rather than damp, errors in inflation.
 \item \emph{Price dispersion.} The recursion $v_t = \theta \Pi_t^{\epsilon} v_{t-1} + (1-\theta)(\Pi^*_t)^{-\epsilon}$ has autoregressive coefficient $\theta \Pi^{\epsilon}$, equal to $0.84$ at the target and to one at $\Pi_v = \theta^{-1/\epsilon}$; beyond it dispersion, and with it the output loss, grows without bound.
 \end{itemize}
 At $\theta = 0.8$ and $\epsilon = 10$ the three poles are at $\bar\Pi = 1.0251$, $\tilde\Pi = 1.0236$ and $\Pi_v = 1.0226$, i.e. $1.8$ to $2.0$ percentage points of quarterly inflation above the target.
+
+Two consequences follow. First, the stochastic economy visits
+neighborhoods of the poles: sequences of adverse shocks push inflation toward
+the region where all three elasticities explode, so the solution must be most
+accurate precisely where the model is most nonlinear. Second, the poles bound
+the domain of any expansion around the steady state: a Taylor series in
+inflation cannot be valid beyond the nearest singularity, less than two
+percentage points away, whatever its order. A global and highly accurate
+solution is therefore not a refinement but a requirement. Moreover, since the
+poles are properties of Calvo's aggregation, none of this structure exists
+under Rotemberg pricing, whose adjustment cost is a smooth quadratic: the two
+blocks, identical to first order, are globally different economies.
+
+How accurate is dictated by how residuals translate into allocations, and
+here the model is demanding in two opposite directions at once. The
+\emph{nominal} direction is stiff. With the $g^1$ elasticity of fifty, an
+inflation-policy error of one percent moves the pricing conditions by fifty
+percent, so the residuals react violently to small errors in inflation; this
+makes the training landscape severely anisotropic, but it also means that
+small residuals pin down inflation tightly. The \emph{real} direction is
+flat. At a fixed point of a candidate policy, $\lambda' = \lambda$ and the
+capital Euler residual, the second row of \eqref{eq:residuals}, reduces to
+$l_2 = -\log\big(\beta(1 + r - \delta)\big)$; because the rental rate falls
+with capital, $r \propto k^{\alpha-1}$, the steady state the policy actually
+converges to is off by
+\begin{equation*}
+\frac{\Delta k}{k} \;\approx\; \frac{l_2}{\beta\, r_{ss} (1-\alpha)}
+\;\approx\; 43\, l_2
+\end{equation*}
+at our calibration ($r_{ss} = 1/\beta - 1 + \delta = 0.035$). The long-run
+return on capital is extremely flat, so here the translation runs the other
+way: a capital Euler residual of $5\times10^{-3}$, small by the usual standards of
+the literature, silently misplaces the long-run capital stock by more than
+20\%. The flat direction therefore sets the residual target, and the
+stiff direction makes that target hard to reach. The effective conditioning
+between the two is of order $10^3$, which is why first-order training methods
+stall on this model and a Newton stage is needed to push below it.
+
 
 \section{Solution method}
 
