@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true, citecolor=blue, linkcolor=black, urlcolor=blue]{hyperref}
+
+\title{Rough notes}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{The Models}
+
+\begin{enumerate}
+  \item \textbf{NK (Rotemberg).} Basic New Keynesian model with capital and
+  Rotemberg quadratic price-adjustment costs. Rotemberg, ``Sticky Prices in the
+  United States,'' \emph{JPE} (1982); textbook form in Gal\'i, \emph{Monetary
+  Policy, Inflation, and the Business Cycle} (2015).
+
+  \item \textbf{Calvo.} New Keynesian model with capital and Calvo staggered
+  pricing. Calvo, ``Staggered Prices in a Utility-Maximizing Framework,''
+  \emph{JME} (1983). The specific version solved here is Section~5 of Kahou,
+  Fern\'andez-Villaverde, Gomez-Cram, Perla and Rosa, ``Spooky Boundaries at a
+  Distance.''
+
+  \item \textbf{NKFV.} Medium-scale New Keynesian model with stochastic
+  volatility (unit-root technology trend, internal habits, intertemporal
+  preference shock). Fern\'andez-Villaverde, Guerr\'on-Quintana, Kuester and
+  Rubio-Ram\'irez, ``Fiscal Volatility Shocks and Economic Activity,''
+  \emph{AER} 105(11) (2015).
+
+  \item \textbf{Calvo + regimes.} The Calvo model augmented with a cost-push
+  AR(1) shock and a two-state Markov supply regime in the firm's cost wedge.
+  Nu\~no, Renner and Scheidegger, ``Monetary Policy with Supply Regimes.''
+\end{enumerate}
+
+\newpage
+\section{NK (Rotemberg)}
+
+\subsection{The equations}
+
+\paragraph{Household.} The representative household maximizes
+\begin{equation*}
+\mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \left\{ \log c_t - \phi \frac{l_t^{1+\eta}}{1+\eta} \right\}
+\end{equation*}
+subject to
+\begin{equation*}
+c_t + k_t + \frac{b_{t+1}}{p_t} = w_t l_t + (1 + r_t - \delta) k_{t-1} + R_{t-1} \frac{b_t}{p_t} + T_t + F_t .
+\end{equation*}
+With $\lambda_t$ the multiplier on the budget constraint and $\Pi_t = p_t/p_{t-1}$, the first-order conditions are
+\begin{align}
+\frac{1}{c_t} &= \lambda_t, \\
+\phi\, l_t^{\eta} &= \lambda_t w_t, \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{\Pi_{t+1}} \right], \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right].
+\end{align}
+
+\paragraph{Final good producer.} The final good is $y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}}$. The demand for variety $i$ and the price index are
+\begin{equation}
+y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t, \qquad
+p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
+\end{equation}
+
+\paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost, common across firms,
+\begin{align}
+\frac{k_{t-1}}{l_t} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
+mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} .
+\end{align}
+The firm chooses its price subject to a quadratic adjustment cost,
+\begin{equation*}
+\max_{\{p_{it}\}} \ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \lambda_t \left\{ \left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t \right\},
+\end{equation*}
+where the indexed price target is
+\begin{equation}
+\Phi_t = \Pi^{1-\chi}\, \Pi_{t-1}^{\chi} .
+\end{equation}
+In the symmetric equilibrium the first-order condition is the New Keynesian Phillips curve
+\begin{equation}
+\psi \left( \frac{\Pi_t}{\Phi_t} - 1 \right) \frac{\Pi_t}{\Phi_t}
+= (1 - \epsilon) + \epsilon\, mc_t
++ \psi \beta\, \mathbb{E}_t \left[ \frac{\lambda_{t+1}}{\lambda_t} \left( \frac{\Pi_{t+1}}{\Phi_{t+1}} - 1 \right) \frac{\Pi_{t+1}}{\Phi_{t+1}} \frac{y_{t+1}}{y_t} \right] .
+\end{equation}
+
+\paragraph{Government.} The central bank follows the Taylor rule
+\begin{equation}
+R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y} \right)^{\gamma_y} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
+\end{equation}
+where $R$, $\Pi$ and $y$ are the steady-state values. The baseline in the code is the output-growth rule, $\gamma_y = 0$ and $\gamma_{\Delta y} = 0.5$. The note \texttt{NK\_rotemberg.tex} uses the output-level rule, $\gamma_{\Delta y} = 0$.
+
+\paragraph{Market clearing.}
+\begin{align}
+y_t &= e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha}, \\
+c_t + k_t + \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t &= y_t + (1-\delta) k_{t-1} .
+\end{align}
+
+\paragraph{Shocks.}
+\begin{align}
+z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
+\xi_t &= \rho_m \xi_{t-1} + \sigma_m \varepsilon_{m,t},
+\end{align}
+with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
+
+\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$, where $y_{t-1}$ is a state only under the output-growth rule. The policy is $(k_t, l_t, \Pi_t)$.
+
+\subsection{Derivations}
+
+\subsubsection{The household problem}
+
+\paragraph{The terms.} In the objective, $\beta \in (0,1)$ is the discount factor and $\mathbb{E}_0$ is the expectation over the future shocks given the information at date 0. The term $\log c_t$ is the utility from consumption $c_t$. The term $\phi\, l_t^{1+\eta}/(1+\eta)$ is the disutility from hours worked $l_t$, where $\phi$ scales the disutility and $\eta$ is the inverse of the Frisch elasticity of labor supply. The left-hand side of the budget constraint is spending, all in units of the final good: consumption $c_t$, the capital $k_t$ carried into the next period, and the purchase of nominal bonds $b_{t+1}$, divided by the price level $p_t$ to convert them into goods. The right-hand side is resources. The term $w_t l_t$ is labor income at the real wage $w_t$. The term $(1 + r_t - \delta) k_{t-1}$ is the capital chosen in the previous period, which earns the real rental rate $r_t$ and loses the fraction $\delta$ to depreciation. The term $R_{t-1} b_t/p_t$ is the real value of the bonds bought in the previous period, which pay the gross nominal rate $R_{t-1}$ that was set at date $t-1$. The last two terms are the lump-sum transfers from the government $T_t$ and the profits of the intermediate firms $F_t$, which the household owns.
+
+\paragraph{States and choices.} The household enters date $t$ with two individual state variables, the capital stock $k_{t-1}$ and the bond holdings $b_t$, which carry the predetermined rate $R_{t-1}$. Both were chosen at date $t-1$ and cannot be changed at date $t$. The choice variables at date $t$ are consumption $c_t$, hours $l_t$, capital $k_t$ and bonds $b_{t+1}$. The household takes as given the prices $w_t$, $r_t$, $p_t$ and $R_t$, the transfers $T_t$ and the profits $F_t$. These are functions of the aggregate state of the economy, which the household cannot affect: the shocks $z_t$ and $\xi_t$, the aggregate capital stock, lagged inflation $\Pi_{t-1}$ and, under the output-growth rule, lagged output $y_{t-1}$. In equilibrium the individual capital stock equals the aggregate capital stock. Bonds drop out of the resource constraint because the government adjusts the lump-sum transfers to service its debt, so the level of debt does not affect the allocation. This is why the equilibrium state $s_t$ contains $k_{t-1}$ but not $b_t$.
+
+The household chooses $\{c_t, l_t, k_t, b_{t+1}\}_{t \ge 0}$ and takes prices, transfers $T_t$ and profits $F_t$ as given. The Lagrangian is
+\begin{multline*}
+\mathcal{L} = \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \bigg\{ \log c_t - \phi \frac{l_t^{1+\eta}}{1+\eta} \\
++ \lambda_t \left[ w_t l_t + (1 + r_t - \delta) k_{t-1} + R_{t-1} \frac{b_t}{p_t} + T_t + F_t - c_t - k_t - \frac{b_{t+1}}{p_t} \right] \bigg\} .
+\end{multline*}
+
+\paragraph{Consumption.} The derivative with respect to $c_t$ is
+\begin{equation*}
+\frac{1}{c_t} - \lambda_t = 0 .
+\end{equation*}
+
+\paragraph{Labor.} The derivative with respect to $l_t$ is
+\begin{equation*}
+-\phi\, l_t^{\eta} + \lambda_t w_t = 0 .
+\end{equation*}
+
+\paragraph{Bonds.} The bond $b_{t+1}$ appears in the date $t$ constraint as a purchase and in the date $t+1$ constraint as a payoff. The derivative is
+\begin{equation*}
+-\frac{\lambda_t}{p_t} + \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{p_{t+1}} \right] = 0 .
+\end{equation*}
+Multiply by $p_t$ and use $\Pi_{t+1} = p_{t+1}/p_t$ to get
+\begin{equation*}
+\lambda_t = \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{\Pi_{t+1}} \right] .
+\end{equation*}
+
+\paragraph{Capital.} Capital $k_t$ is bought at date $t$ and pays $1 + r_{t+1} - \delta$ at date $t+1$. The derivative is
+\begin{equation*}
+-\lambda_t + \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right] = 0 .
+\end{equation*}
+
+\paragraph{Transversality.} The two Euler equations are necessary but not sufficient. The household's optimum also requires
+\begin{equation*}
+\lim_{T \to \infty} \mathbb{E}_0 \left[ \beta^T \lambda_T k_T \right] = 0, \qquad
+\lim_{T \to \infty} \mathbb{E}_0 \left[ \beta^T \lambda_T \frac{b_{T+1}}{p_T} \right] = 0 .
+\end{equation*}
+
+\subsubsection{The final good producer}
+
+The final good producer takes $p_t$ and $\{p_{it}\}$ as given and solves
+\begin{equation*}
+\max_{\{y_{it}\}} \ p_t \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}} - \int_0^1 p_{it}\, y_{it}\, di .
+\end{equation*}
+The derivative of the aggregator with respect to $y_{it}$ is
+\begin{equation*}
+\frac{\partial y_t}{\partial y_{it}} = \left( \int_0^1 y_{jt}^{\frac{\epsilon-1}{\epsilon}} dj \right)^{\frac{1}{\epsilon-1}} y_{it}^{-\frac{1}{\epsilon}} = y_t^{\frac{1}{\epsilon}}\, y_{it}^{-\frac{1}{\epsilon}},
+\end{equation*}
+so the first-order condition $p_t\, y_t^{1/\epsilon}\, y_{it}^{-1/\epsilon} = p_{it}$ gives the demand function
+\begin{equation*}
+y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t .
+\end{equation*}
+The technology has constant returns, so profits are zero, $p_t y_t = \int_0^1 p_{it} y_{it}\, di$. Substitute the demand function,
+\begin{equation*}
+p_t y_t = \int_0^1 p_{it}^{1-\epsilon}\, p_t^{\epsilon}\, y_t\, di
+\quad \Longrightarrow \quad
+p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
+\end{equation*}
+
+\subsubsection{The intermediate firm: cost minimization}
+
+Firm $i$ rents capital and labor in competitive markets. For a given output level $\bar y$ it solves
+\begin{equation*}
+\min_{k_{it-1},\, l_{it}} \ w_t l_{it} + r_t k_{it-1}
+\quad \text{subject to} \quad e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha} = \bar y .
+\end{equation*}
+Let $\mu_t$ be the multiplier on the constraint. The first-order conditions are
+\begin{align*}
+w_t &= \mu_t (1-\alpha)\, e^{z_t} k_{it-1}^{\alpha} l_{it}^{-\alpha}, \\
+r_t &= \mu_t\, \alpha\, e^{z_t} k_{it-1}^{\alpha-1} l_{it}^{1-\alpha} .
+\end{align*}
+Divide the first by the second,
+\begin{equation*}
+\frac{w_t}{r_t} = \frac{1-\alpha}{\alpha} \frac{k_{it-1}}{l_{it}}
+\quad \Longrightarrow \quad
+\frac{k_{it-1}}{l_{it}} = \frac{\alpha}{1-\alpha} \frac{w_t}{r_t} .
+\end{equation*}
+The capital-labor ratio does not depend on $i$, so it equals the aggregate ratio $k_{t-1}/l_t$.
+
+The multiplier $\mu_t$ is the cost of one more unit of output, that is, the real marginal cost $mc_t$. Solve the labor condition for $\mu_t$ and substitute the capital-labor ratio,
+\begin{equation*}
+mc_t = \frac{w_t}{(1-\alpha)\, e^{z_t}} \left( \frac{k_{it-1}}{l_{it}} \right)^{-\alpha}
+= \frac{w_t}{(1-\alpha)\, e^{z_t}} \left( \frac{1-\alpha}{\alpha} \frac{r_t}{w_t} \right)^{\alpha}
+= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} .
+\end{equation*}
+Marginal cost is the same for all firms and does not depend on the output level. With constant returns the total cost is $w_t l_{it} + r_t k_{it-1} = mc_t\, y_{it}$.
+
+\subsubsection{The intermediate firm: pricing}
+
+Real profits of firm $i$ at date $t$ are revenue minus production cost minus the adjustment cost,
+\begin{equation*}
+\frac{p_{it}}{p_t} y_{it} - mc_t\, y_{it} - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t .
+\end{equation*}
+Substitute the demand function $y_{it} = (p_{it}/p_t)^{-\epsilon} y_t$. The firm is owned by the household, so it discounts with $\beta^t \lambda_t$ and solves
+\begin{equation*}
+\max_{\{p_{it}\}} \ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \lambda_t \left\{ \left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t \right\} .
+\end{equation*}
+The price $p_{it}$ appears in the date $t$ profits and in the date $t+1$ adjustment cost, where it is the base price. The first-order condition is
+\begin{multline*}
+\lambda_t \left\{ (1-\epsilon) \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} \frac{y_t}{p_t}
++ \epsilon\, mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon-1} \frac{y_t}{p_t}
+- \psi \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right) \frac{y_t}{\Phi_t\, p_{it-1}} \right\} \\
++ \beta\, \mathbb{E}_t \left[ \lambda_{t+1}\, \psi \left( \frac{p_{it+1}}{\Phi_{t+1}\, p_{it}} - 1 \right) \frac{p_{it+1}}{\Phi_{t+1}\, p_{it}^2}\, y_{t+1} \right] = 0 .
+\end{multline*}
+All firms face the same problem, so in the symmetric equilibrium $p_{it} = p_t$ for all $i$. Then $p_{it}/(\Phi_t p_{it-1}) = \Pi_t/\Phi_t$. Multiply the condition by $p_t/(\lambda_t y_t)$,
+\begin{equation*}
+(1-\epsilon) + \epsilon\, mc_t - \psi \left( \frac{\Pi_t}{\Phi_t} - 1 \right) \frac{\Pi_t}{\Phi_t}
++ \psi \beta\, \mathbb{E}_t \left[ \frac{\lambda_{t+1}}{\lambda_t} \left( \frac{\Pi_{t+1}}{\Phi_{t+1}} - 1 \right) \frac{\Pi_{t+1}}{\Phi_{t+1}} \frac{y_{t+1}}{y_t} \right] = 0,
+\end{equation*}
+which is the Phillips curve of the previous subsection. Without the adjustment cost, $\psi = 0$, it reduces to the flexible-price markup rule $mc_t = (\epsilon-1)/\epsilon$.
+
+\subsubsection{Aggregation and market clearing}
+
+In the symmetric equilibrium all firms set the same price, so $y_{it} = y_t$, $k_{it-1} = k_{t-1}$ and $l_{it} = l_t$. There is no price dispersion, and aggregate output is
+\begin{equation*}
+y_t = e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha} .
+\end{equation*}
+Aggregate profits are output minus factor payments minus the adjustment cost,
+\begin{equation*}
+F_t = y_t - w_t l_t - r_t k_{t-1} - \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t .
+\end{equation*}
+The government budget constraint is $T_t + R_{t-1} b_t/p_t = b_{t+1}/p_t$. Substitute both into the household budget constraint. The bond terms, the wage bill and the rental payments cancel, and what remains is the resource constraint
+\begin{equation*}
+c_t + k_t + \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t = y_t + (1-\delta) k_{t-1} .
+\end{equation*}
+
+\subsubsection{Monetary policy}
+
+The Taylor rule is not derived from an optimization problem. It is a behavioral rule that closes the model.
+
+\subsubsection{Steady state}
+
+Set all shocks to zero and all variables constant. Inflation equals the target, so $\Phi = \Pi$ and the adjustment cost is zero. The two Euler equations give
+\begin{equation*}
+R = \frac{\Pi}{\beta}, \qquad r = \frac{1}{\beta} - 1 + \delta .
+\end{equation*}
+The Phillips curve gives $mc = (\epsilon-1)/\epsilon$. Invert the marginal cost formula for the wage,
+\begin{equation*}
+w = \left[ (1-\alpha)^{1-\alpha} \alpha^{\alpha}\, \frac{mc}{r^{\alpha}} \right]^{\frac{1}{1-\alpha}} .
+\end{equation*}
+Normalize $l = 1$ and let $\phi$ adjust. Then
+\begin{equation*}
+k = \frac{\alpha}{1-\alpha} \frac{w}{r}, \qquad
+y = k^{\alpha}, \qquad
+c = y - \delta k, \qquad
+\lambda = \frac{1}{c}, \qquad
+\phi = \frac{w}{c} .
+\end{equation*}
+
+\end{document}
