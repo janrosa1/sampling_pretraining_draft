@@ -257,7 +257,7 @@ along impulse responses and simulated paths, even in this case.
 
 \subsection{New Keynesian: Rotemberg Pricing}\label{sec:app-rotemberg}
 
-We consider a standard New Keynesian economy with capital accumulation and nominal rigidities. A representative household consumes, supplies labor, and saves in physical capital and nominal bonds. A competitive final-good producer aggregates a continuum of differentiated varieties, each supplied by a monopolistically competitive intermediate firm that rents capital and hires labor to produce under a technology subject to an aggregate productivity shock. Price stickiness takes the Rotemberg form, where firms face a quadratic cost of adjusting their nominal price. Monetary policy follows a Taylor rule that responds to inflation and output growth and includes a monetary policy shock. The two exogenous disturbances, to productivity and to the policy rate, are the only sources of aggregate uncertainty.
+We consider a standard New Keynesian economy with capital accumulation and nominal rigidities. A representative household consumes, supplies labor, and saves in physical capital and nominal bonds. A competitive final-good producer aggregates a continuum of differentiated varieties, each supplied by a monopolistically competitive intermediate firm that rents capital and hires labor to produce under a technology subject to an aggregate productivity shock. Price stickiness takes the Rotemberg form, where firms face a quadratic cost of adjusting their nominal price. Monetary policy follows a Taylor rule that responds to inflation and output growth and includes a monetary policy shock. The two exogenous shocks, to productivity and to the policy rate, are the only sources of aggregate uncertainty.
 
 \paragraph{Household.} The representative household maximizes
 \begin{equation*}
@@ -281,11 +281,12 @@ y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t, \qquad
 p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
 \end{equation}
 
-\paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost, common across firms,
+\paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost,
 \begin{align}
-\frac{k_{t-1}}{l_t} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
-mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} .
+\frac{k_{it-1}}{l_{it}} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
+mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} ,
 \end{align}
+which is common across all intermediate firms.
 The firm chooses its price subject to a quadratic adjustment cost,
 \begin{equation*}
 \max_{\{p_{it}\}} \ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \lambda_t \left\{ \left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t \right\},
@@ -320,7 +321,9 @@ z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
 \end{align}
 with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 
-\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$. Lagged inflation $\Pi_{t-1}$ is a state because it enters the reference rate $\Phi_t$ of the adjustment cost, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $(k_t, l_t, \Pi_t)$.
+\paragraph{State space and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$. Lagged inflation $\Pi_{t-1}$ is a state because it enters the reference rate $\Phi_t$ of the adjustment cost, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $\left(k(s_t), l(s_t), \Pi(s_t)\right)$.
+
+\paragraph{Calibration values.} The calibration values can be found in \cref{app:calibration}.
 
 \subsection{New Keynesian: Calvo Pricing}\label{sec:app-calvo}
 
@@ -329,6 +332,41 @@ with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 \section{Conclusion}\label{sec:conclusion}
 
 % CONCLUSION PLACEHOLDER
+
+\newpage
+
+\appendix
+
+\section{Calibration Values}\label{app:calibration}
+
+\Cref{tab:calib-nk-rotemberg} reports the baseline calibration of the New Keynesian model with Rotemberg pricing. The labor disutility scale $\phi$ is not set directly but calibrated so that steady-state labor equals one, $l_{ss} = 1$.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{llc}
+\toprule
+Parameter & Description & Value \\
+\midrule
+$\beta$ & Discount factor & $0.99$ \\
+$\alpha$ & Capital share & $1/3$ \\
+$\delta$ & Depreciation rate & $0.025$ \\
+$\eta$ & Inverse Frisch elasticity & $1.0$ \\
+$\phi$ & Labor disutility scale & set so that $l_{ss} = 1$ \\
+$\epsilon$ & Elasticity of substitution across varieties & $10.0$ \\
+$\psi$ & Rotemberg adjustment cost & $100.0$ \\
+$\chi$ & Inflation indexation in the price target & $0.25$ \\
+$\Pi$ & Gross inflation target & $1.005$ \\
+$\gamma_\Pi$ & Taylor rule response to inflation & $2.0$ \\
+$\gamma_{\Delta y}$ & Taylor rule response to output growth & $0.5$ \\
+$\rho$ & Persistence of the productivity shock & $0.95$ \\
+$\sigma_z$ & Standard deviation of the productivity shock & $0.007$ \\
+$\rho_m$ & Persistence of the monetary policy shock & $0.9$ \\
+$\sigma_m$ & Standard deviation of the monetary policy shock & $0.001$ \\
+\bottomrule
+\end{tabular}
+\caption{Baseline calibration of the New Keynesian model with Rotemberg pricing.}
+\label{tab:calib-nk-rotemberg}
+\end{table}
 
 \newpage
 
