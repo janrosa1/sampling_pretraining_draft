@@ -1,0 +1,337 @@
+% !TEX program = pdflatex
+% !BIB program = bibtex
+% !TEX enableSynctex = true
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amsopn,amstext,thmtools,setspace,url,graphicx,underlin,arydshln}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{graphics}
+\usepackage{indentfirst}
+\usepackage{adjustbox}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+
+\hypersetup{
+colorlinks = true,
+linkcolor=blue,
+citecolor=red,
+urlcolor=cyan
+}
+
+\usepackage[capitalise,noabbrev]{cleveref} %
+
+\crefname{equation}{}{}
+\usepackage[nohead]{geometry}
+\declaretheorem[numbered=yes]{definition}
+\DeclareMathOperator*{\argmin}{argmin}
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{problem}{Problem}
+\newcommand\bigzero{\makebox(0,0){\text{\huge0}}}
+\newcommand{\iidsim}{\overset{\mathrm{iid}}{\sim}}
+\newcommand{\D}[1][]{\ensuremath{\boldsymbol{\partial}_{#1}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\diff}{\ensuremath{\mathrm{d}}}
+\newcommand{\NN}{\ensuremath{\mathrm{NN}}}
+\newcommand{\ex}{\ensuremath{\mathrm{ex}}}
+\newcommand{\set}[1]{\ensuremath{\left\{{#1}\right\}}}
+\newcommand{\indicator}[1]{\ensuremath{\mathds{1}\left\{{#1}\right\}}}
+\newcommand{\condexpec}[3][]{\ensuremath{\mathbb{E}_{#1}\left[{#2} \; \middle| \; {#3} \right]}}
+\newcommand{\prob}[2][]{\ensuremath{\mathbb{P}_{#1}\left( {#2} \right)}}
+\newcommand{\cprob}[2]{\ensuremath{\mathbb{P}\left( {#1}\left| {#2} \right. \right)}}
+\newcommand{\condcov}[2]{\ensuremath{\mathrm{cov}\left({#1} \; \middle| \; {#2} \right)}}
+\newcommand{\expec}[2][]{\ensuremath{\mathbb{E}_{{#1}}\left[ {#2} \right]}}
+\newcommand{\bigO}[1]{\ensuremath{\mathcal{O}(#1)}}
+\newcommand\blfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
+\newcommand{\Xtrain}{\mathcal{D}}
+\newcommand{\Xdom}{\mathcal{X}}
+\newcommand{\Xextr}{\mathcal{X}_{\mathrm{extr}}}
+\newcommand{\Xhull}{\mathrm{Hull}(\Xtrain)}
+\newcommand{\Xtest}{\mathcal{X}_{\mathrm{test}}}
+\newcommand{\Ltest}{\ell_{\mathrm{test}}}
+\newcommand{\st}{\textrm{s.t.}\,}
+
+\usepackage{xr}
+\newcommand{\mek}[1]{\textcolor{blue}{[MEK: #1]}}
+
+\bibliographystyle{ecta}
+
+\usepackage{etoolbox} % for \AtBeginEnvironment
+
+% Reduce space around all displayed equations
+\AtBeginEnvironment{equation}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+\AtBeginEnvironment{equation*}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+\AtBeginEnvironment{align}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+\AtBeginEnvironment{align*}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+\AtBeginEnvironment{gather}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+\AtBeginEnvironment{gather*}{
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+}
+
+\usepackage{titlesec}
+
+% Adjust spacing for sections
+\titlespacing{\section}{0pt}{*0.9}{*0.6}
+
+% Adjust spacing for subsections
+\titlespacing{\subsection}{0pt}{*0.5}{*0.4}
+
+% Adjust spacing for subsubsections
+\titlespacing{\subsubsection}{0pt}{*0.4}{*0.4}
+
+% Adjust spacing for paragraphs
+\titlespacing{\paragraph}{0pt}{*0.4}{*0.5}
+
+\linespread{2.0}
+\geometry{left=1in, right=1in, top=1in, bottom=1in}
+\pagenumbering{arabic}
+
+\begin{document}
+
+\title{TITLE PLACEHOLDER}
+
+\author{AUTHORS PLACEHOLDER}
+
+\date{\today}
+
+\maketitle\blfootnote{AFFILIATIONS AND ACKNOWLEDGMENTS PLACEHOLDER}
+
+\begin{abstract}
+\noindent
+\singlespace
+% ABSTRACT PLACEHOLDER
+
+\textit{Keywords}{\small: PLACEHOLDER.}
+
+\textit{JEL codes}{\small: {\bf PLACEHOLDER.}}
+
+\end{abstract}
+
+\newpage
+
+\section{Introduction}\label{sec:introduction}
+
+\textcolor{red}{Preliminary intro}
+
+This paper proposes a new method for solving nonlinear dynamic stochastic general
+equilibrium (DSGE) models that starts from the full solution of
+a simplified deterministic model and corrects it for stochastic risk in function space.
+We focus on New Keynesian models, but the method applies to any model whose
+deterministic version can be solved accurately, such as open-economy and
+international macro models or production-network models \citep{fernandezvillaverde2026production}. The method has
+two steps. First, we solve the deterministic, i.e., perfect-foresight, version
+of the model, which can often be done efficiently and accurately with deep
+learning or kernel methods \citep{kahou2024spooky, kahou2026kernel}. Second,
+this solution serves as the initial point in function space for solving the
+full stochastic version of the model. The gap between the deterministic and
+the stochastic solution is closed by a
+Newton--Kantorovich iteration on the stochastic equilibrium conditions, the
+function-space analogue of Newton's method for a system of equations. Newton's
+method is fast when the initial guess is close to the solution, and the
+deterministic solution is close, since it misses only the effect of risk, which
+is of the order of the variance of the shocks.
+
+\paragraph{Contribution} Our contributions are threefold. First, we show that under regularity
+conditions on the equilibrium in a normed space, the deterministic solution
+is close to the full stochastic solution, with a distance in norm of the
+order of the variance of the largest shock in the model. Second,
+starting from the deterministic solution, we propose a Newton--Kantorovich
+algorithm that converges quickly to the stochastic solution. Third, to demonstrate
+the method, we solve nonlinear New Keynesian models with capital accumulation under
+both Rotemberg and Calvo pricing. The Calvo version with capital is notoriously nonlinear, and to the
+best of our knowledge no global solution of it exists: existing solutions rely
+on perturbation around the steady state, and global methods adopt Rotemberg
+pricing or drop capital.
+
+\paragraph{Intuition of the paper} The first step of our approach is to
+learn the solution of the deterministic problem. This solution already contains
+most of the information about the solution of the stochastic problem: the only
+missing element is the effect of stochastic shocks and uncertainty. The second step learns this missing
+element, which explains the fast convergence of our method.
+The deterministic solution also provides something subtler.
+Sampling the state space is challenging even in moderate
+dimension \citep{kahou2021exploiting, fernandez2026taming}, and more so in highly nonlinear problems. Simulating the
+deterministic solution under the calibrated shocks delivers a region of the state space that is close, although not identical, to
+the region the stochastic economy visits.
+This also contributes to the robustness and efficiency of our method.
+
+\paragraph{Why start from the deterministic solution?} Three properties of the deterministic solution motivate this choice. First, the deterministic solution can be computed accurately and at low computational cost, as the deterministic problem is simpler, particularly when formulated in sequential form: finding the trajectory of the economy from given initial conditions, as documented by \citet{kahou2024spooky, kahou2026kernel} using neural networks and kernel machines as the approximating functions.  Second, through implicit or explicit regularization of solution paths, the resulting solution automatically satisfies the transversality and no-Ponzi conditions. This is particularly important for problems with hysteresis, which arise frequently in growth models \citep{skiba1978optimal, azariadis1990threshold} and open-economy models \citep{mendoza2010sudden, mendoza2020fipit}. Third, because transversality conditions ensure the stability of equilibrium paths, a solution satisfying these conditions is stable, preventing errors from accumulating along the dynamics. Error accumulation is particularly problematic in highly nonlinear models, such as those studied in this paper.\footnote{This is a well-known problem in DSGE models, and solutions specific to individual numerical methods have been proposed, such as pruning in higher-order perturbation methods \citep{kim2008calculating, andreasen2018pruned}.}
+
+\paragraph{Related works} Our work is related to several strands of the
+literature. First, the idea of exploiting the deterministic solution to solve
+stochastic models was introduced by \citet{boppart2018exploiting}, who compute
+first-order responses to aggregate shocks from a single perfect-foresight
+transition path. Their approximation is linear in the size of aggregate shocks
+and therefore certainty-equivalent: the effects of risk are absent by
+construction, whereas capturing them is precisely the object of our second
+step. Closest to us, \citet{ajevskis2017semiglobal} constructs semi-global
+solutions as expansions in the volatility parameter around deterministic
+trajectories. Sequence-space methods
+\citep{auclert2021sequence} likewise perturb equilibrium objects around a
+deterministic path. All three approaches share our starting point, the deterministic solution,
+but deliver path-based objects: solutions attached to a particular initial condition and
+shock history, to be recomputed when either changes, and accurate to the order
+at which the expansion is truncated. In contrast, we correct the deterministic
+solution for risk over the whole relevant state space and iterate to the exact
+stochastic solution: the output is the recursive equilibrium of the entire
+economy, computed once and valid for every shock history.
+
+This paper is also related to the broader perturbation literature. Standard
+perturbation methods \citep{schmitt2004solving, fernandez2016solution} expand
+policy functions around a single point, the deterministic steady state, and
+their accuracy degrades as the economy moves away from it, which is precisely
+the case in the highly nonlinear models we study. A theoretical branch of this
+literature studies when such expansions are valid: \citet{judd2001asymptotic}
+develop asymptotic expansions in the volatility parameter,
+\citet{jin2002perturbation} establish the local validity of perturbation
+solutions via implicit-function arguments, \citet{kim2008calculating} analyze
+the accuracy of second-order approximations, and \citet{lombardo2018theory}
+prove convergence of the resulting series expansions. Our first contribution belongs to this lineage but differs in the point of
+expansion and in the setting: we expand around the globally nonlinear
+deterministic solution rather than a steady state.
+
+Lastly, our paper is related to the literature that uses modern machine
+learning methods, in particular deep learning, to solve dynamic models in
+economics \citep{maliar2021deep, azinovic2022deep, kahou2021exploiting,
+han2026deepham, kase2022estimating, barnett2023deep, fernandez2023financial,
+jungerman2023dynamic, duarte2024machine, payne2024deep}. These methods train a
+neural network to minimize the residuals of the equilibrium conditions on a
+sample of states, starting from a random initialization and sampling the state
+space either on a grid or by simulating the current policy. We differ in two
+ways. First, our starting point is not random but the deterministic solution,
+which already contains most of the economics of the problem and leaves only
+the effect of risk to be learned. Second, the deterministic solution tells us
+where to sample, since simulating it under the calibrated shocks delivers a
+region close to the one the stochastic economy visits. This matters in highly
+nonlinear models: in our experience, a standard deep learning approach with
+adaptive sampling fails in the New Keynesian model with Calvo pricing and
+capital accumulation.
+
+\paragraph{Application} We apply the method to a New Keynesian model with
+capital under both Calvo and Rotemberg pricing. With a high elasticity of
+substitution, the Calvo pricing block is known to be strongly nonlinear
+\citep{ascari2014macroeconomics}: the reset-price and price-dispersion
+recursions have singularities a few percentage points above the inflation target.
+We demonstrate that the Newton--Kantorovich iteration delivers stochastic
+policy functions whose equilibrium residuals are close to numerical zero
+along impulse responses and simulated paths, even in this case.
+
+\section{The Method}\label{sec:method}
+
+% METHOD PLACEHOLDER
+
+\section{Applications}\label{sec:applications}
+
+% APPLICATIONS PLACEHOLDER
+
+\subsection{Real Business Cycles: An Illustration}\label{sec:app-rbc}
+
+% RBC PLACEHOLDER
+
+\subsection{New Keynesian: Rotemberg Pricing}\label{sec:app-rotemberg}
+
+We consider a standard New Keynesian economy with capital accumulation and nominal rigidities. A representative household consumes, supplies labor, and saves in physical capital and nominal bonds. A competitive final-good producer aggregates a continuum of differentiated varieties, each supplied by a monopolistically competitive intermediate firm that rents capital and hires labor to produce under a technology subject to an aggregate productivity shock. Price stickiness takes the Rotemberg form, where firms face a quadratic cost of adjusting their nominal price. Monetary policy follows a Taylor rule that responds to inflation and output growth and includes a monetary policy shock. The two exogenous disturbances, to productivity and to the policy rate, are the only sources of aggregate uncertainty.
+
+\paragraph{Household.} The representative household maximizes
+\begin{equation*}
+\mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \left\{ \log c_t - \phi \frac{l_t^{1+\eta}}{1+\eta} \right\}
+\end{equation*}
+subject to
+\begin{equation*}
+c_t + k_t + \frac{b_{t+1}}{p_t} = w_t l_t + (1 + r_t - \delta) k_{t-1} + R_{t-1} \frac{b_t}{p_t} + T_t + F_t .
+\end{equation*}
+With $\lambda_t$ the multiplier on the budget constraint and $\Pi_t = p_t/p_{t-1}$, the first-order conditions are
+\begin{align}
+\frac{1}{c_t} &= \lambda_t, \\
+\phi\, l_t^{\eta} &= \lambda_t w_t, \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{\Pi_{t+1}} \right], \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right].
+\end{align}
+
+\paragraph{Final good producer.} The final good is $y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}}$. The demand for variety $i$ and the price index are
+\begin{equation}
+y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t, \qquad
+p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
+\end{equation}
+
+\paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost, common across firms,
+\begin{align}
+\frac{k_{t-1}}{l_t} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
+mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} .
+\end{align}
+The firm chooses its price subject to a quadratic adjustment cost,
+\begin{equation*}
+\max_{\{p_{it}\}} \ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \lambda_t \left\{ \left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t \right\},
+\end{equation*}
+where the indexed price target is
+\begin{equation}
+\Phi_t = \Pi^{1-\chi}\, \Pi_{t-1}^{\chi} .
+\end{equation}
+In the symmetric equilibrium the first-order condition is the New Keynesian Phillips curve
+\begin{equation}
+\psi \left( \frac{\Pi_t}{\Phi_t} - 1 \right) \frac{\Pi_t}{\Phi_t}
+= (1 - \epsilon) + \epsilon\, mc_t
++ \psi \beta\, \mathbb{E}_t \left[ \frac{\lambda_{t+1}}{\lambda_t} \left( \frac{\Pi_{t+1}}{\Phi_{t+1}} - 1 \right) \frac{\Pi_{t+1}}{\Phi_{t+1}} \frac{y_{t+1}}{y_t} \right] .
+\end{equation}
+
+\paragraph{Government.} The central bank follows the Taylor rule
+\begin{equation}
+R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
+\end{equation}
+where $R$ and $\Pi$ are the steady-state values. This is the output-growth rule, with $\gamma_\Pi = 2$ and $\gamma_{\Delta y} = 0.5$.
+
+\paragraph{Market clearing.}
+\begin{align}
+y_t &= e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha}, \\
+c_t + k_t + \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t &= y_t + (1-\delta) k_{t-1} .
+\end{align}
+
+\paragraph{Shocks.}
+\begin{align}
+z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
+\xi_t &= \rho_m \xi_{t-1} + \sigma_m \varepsilon_{m,t},
+\end{align}
+with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
+
+\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$. Lagged inflation $\Pi_{t-1}$ is a state because it enters the reference rate $\Phi_t$ of the adjustment cost, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $(k_t, l_t, \Pi_t)$.
+
+\subsection{New Keynesian: Calvo Pricing}\label{sec:app-calvo}
+
+% CALVO PLACEHOLDER
+
+\section{Conclusion}\label{sec:conclusion}
+
+% CONCLUSION PLACEHOLDER
+
+\newpage
+
+\bibliography{sampling_bib}
+
+\end{document}
