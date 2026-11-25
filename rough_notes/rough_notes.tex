@@ -89,9 +89,9 @@ In the symmetric equilibrium the first-order condition is the New Keynesian Phil
 
 \paragraph{Government.} The central bank follows the Taylor rule
 \begin{equation}
-R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y} \right)^{\gamma_y} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
+R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
 \end{equation}
-where $R$, $\Pi$ and $y$ are the steady-state values. The baseline in the code is the output-growth rule, $\gamma_y = 0$ and $\gamma_{\Delta y} = 0.5$. The note \texttt{NK\_rotemberg.tex} uses the output-level rule, $\gamma_{\Delta y} = 0$.
+where $R$ and $\Pi$ are the steady-state values. This is the output-growth rule, and it is the one the code uses, with $\gamma_\Pi = 2$ and $\gamma_{\Delta y} = 0.5$. The note \texttt{NK\_rotemberg.tex} uses the output-level rule instead, which replaces $y_t/y_{t-1}$ by $y_t/y$, where $y$ is the steady-state value of output.
 
 \paragraph{Market clearing.}
 \begin{align}
@@ -106,7 +106,7 @@ z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
 \end{align}
 with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 
-\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$, where $y_{t-1}$ is a state only under the output-growth rule. The policy is $(k_t, l_t, \Pi_t)$.
+\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, \Pi_{t-1}, y_{t-1})$. Lagged inflation $\Pi_{t-1}$ is a state because it enters the reference rate $\Phi_t$ of the adjustment cost, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $(k_t, l_t, \Pi_t)$.
 
 \subsection{Derivations}
 
@@ -114,7 +114,7 @@ with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 
 \paragraph{The terms.} In the objective, $\beta \in (0,1)$ is the discount factor and $\mathbb{E}_0$ is the expectation over the future shocks given the information at date 0. The term $\log c_t$ is the utility from consumption $c_t$. The term $\phi\, l_t^{1+\eta}/(1+\eta)$ is the disutility from hours worked $l_t$, where $\phi$ scales the disutility and $\eta$ is the inverse of the Frisch elasticity of labor supply. The left-hand side of the budget constraint is spending, all in units of the final good: consumption $c_t$, the capital $k_t$ carried into the next period, and the purchase of nominal bonds $b_{t+1}$, divided by the price level $p_t$ to convert them into goods. The right-hand side is resources. The term $w_t l_t$ is labor income at the real wage $w_t$. The term $(1 + r_t - \delta) k_{t-1}$ is the capital chosen in the previous period, which earns the real rental rate $r_t$ and loses the fraction $\delta$ to depreciation. The term $R_{t-1} b_t/p_t$ is the real value of the bonds bought in the previous period, which pay the gross nominal rate $R_{t-1}$ that was set at date $t-1$. The last two terms are the lump-sum transfers from the government $T_t$ and the profits of the intermediate firms $F_t$, which the household owns.
 
-\paragraph{States and choices.} The household enters date $t$ with two individual state variables, the capital stock $k_{t-1}$ and the bond holdings $b_t$, which carry the predetermined rate $R_{t-1}$. Both were chosen at date $t-1$ and cannot be changed at date $t$. The choice variables at date $t$ are consumption $c_t$, hours $l_t$, capital $k_t$ and bonds $b_{t+1}$. The household takes as given the prices $w_t$, $r_t$, $p_t$ and $R_t$, the transfers $T_t$ and the profits $F_t$. These are functions of the aggregate state of the economy, which the household cannot affect: the shocks $z_t$ and $\xi_t$, the aggregate capital stock, lagged inflation $\Pi_{t-1}$ and, under the output-growth rule, lagged output $y_{t-1}$. In equilibrium the individual capital stock equals the aggregate capital stock. Bonds drop out of the resource constraint because the government adjusts the lump-sum transfers to service its debt, so the level of debt does not affect the allocation. This is why the equilibrium state $s_t$ contains $k_{t-1}$ but not $b_t$.
+\paragraph{States and choices.} The household enters date $t$ with two individual state variables, the capital stock $k_{t-1}$ and the bond holdings $b_t$, which carry the predetermined rate $R_{t-1}$. Both were chosen at date $t-1$ and cannot be changed at date $t$. The choice variables at date $t$ are consumption $c_t$, hours $l_t$, capital $k_t$ and bonds $b_{t+1}$. The household takes as given the prices $w_t$, $r_t$, $p_t$ and $R_t$, the transfers $T_t$ and the profits $F_t$. These are functions of the aggregate state of the economy, which the household cannot affect: the shocks $z_t$ and $\xi_t$, the aggregate capital stock, lagged inflation $\Pi_{t-1}$ and lagged output $y_{t-1}$. In equilibrium the individual capital stock equals the aggregate capital stock. Bonds drop out of the resource constraint because the government adjusts the lump-sum transfers to service its debt, so the level of debt does not affect the allocation. This is why the equilibrium state $s_t$ contains $k_{t-1}$ but not $b_t$.
 
 The household chooses $\{c_t, l_t, k_t, b_{t+1}\}_{t \ge 0}$ and takes prices, transfers $T_t$ and profits $F_t$ as given. The Lagrangian is
 \begin{multline*}
@@ -175,10 +175,10 @@ p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
 
 \subsubsection{The intermediate firm: cost minimization}
 
-Firm $i$ rents capital and labor in competitive markets. For a given output level $\bar y$ it solves
+Firm $i$ rents capital and labor in competitive markets. For a given output level $\bar y_{it}$ it solves
 \begin{equation*}
 \min_{k_{it-1},\, l_{it}} \ w_t l_{it} + r_t k_{it-1}
-\quad \text{subject to} \quad e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha} = \bar y .
+\quad \text{subject to} \quad e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha} = \bar y_{it} .
 \end{equation*}
 Let $\mu_t$ be the multiplier on the constraint. The first-order conditions are
 \begin{align*}
@@ -203,27 +203,57 @@ Marginal cost is the same for all firms and does not depend on the output level.
 
 \subsubsection{The intermediate firm: pricing}
 
-Real profits of firm $i$ at date $t$ are revenue minus production cost minus the adjustment cost,
+\paragraph{What the firm chooses.} Firm $i$ takes $p_t$, $y_t$, $mc_t$ and the demand function $y_{it} = (p_{it}/p_t)^{-\epsilon} y_t$ as given, with $\epsilon > 1$. It chooses its price $p_{it}$ to maximize profits.
+
+\paragraph{Profits.} Real profits of firm $i$ at date $t$ are
 \begin{equation*}
-\frac{p_{it}}{p_t} y_{it} - mc_t\, y_{it} - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t .
+\frac{p_{it}}{p_t}\, y_{it} - mc_t\, y_{it} - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t .
 \end{equation*}
-Substitute the demand function $y_{it} = (p_{it}/p_t)^{-\epsilon} y_t$. The firm is owned by the household, so it discounts with $\beta^t \lambda_t$ and solves
+The first term is the revenue. In dollars it is $p_{it}\, y_{it}$, and dividing by $p_t$ expresses it in units of the final good. The second term is the production cost $w_t l_{it} + r_t k_{it-1} = mc_t\, y_{it}$ from the cost minimization. The third term is the cost of changing the price. Substitute the demand function into the first two terms,
+\begin{equation*}
+\left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t .
+\end{equation*}
+
+\paragraph{Where $\Phi_t$ comes from.} The adjustment cost is an assumption of the model. The familiar quadratic cost of changing a nominal price is $\frac{\psi}{2} (p_{it} - p_{it-1})^2$. Three changes lead from it to the term above.
+
+First, the cost is on the percentage change of the price and not on the dollar change,
+\begin{equation*}
+\left( \frac{p_{it} - p_{it-1}}{p_{it-1}} \right)^2 = \left( \frac{p_{it}}{p_{it-1}} - 1 \right)^2 .
+\end{equation*}
+The dollar version is in dollars squared and quadruples when all prices double. The percentage version is a pure number.
+
+Second, the cost is multiplied by aggregate output $y_t$, so that it is in units of the final good and stays proportional to the size of the economy.
+
+Third, the reference price changes. So far the cost is zero only when $p_{it} = p_{it-1}$. Let $\Pi_t = p_t/p_{t-1}$ be gross inflation, that is, the growth rate of the price level between $t-1$ and $t$, and let $\Pi$ be its value in the steady state. If $\Pi \ne 1$, every firm has to raise its price at that rate just to keep its relative price, and it would pay the cost forever. The model replaces the reference price $p_{it-1}$ by $\Phi_t\, p_{it-1}$,
+\begin{equation*}
+\left( \frac{p_{it} - \Phi_t\, p_{it-1}}{\Phi_t\, p_{it-1}} \right)^2 = \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 ,
+\qquad
+\Phi_t = \Pi^{1-\chi}\, \Pi_{t-1}^{\chi} , \quad \chi \in [0,1] .
+\end{equation*}
+The firm can raise its price at the rate $\Phi_t$ for free and pays only for the deviation from it. The rate $\Phi_t$ is a weighted geometric average of steady-state inflation $\Pi$ and last period's inflation $\Pi_{t-1}$. With $\chi = 0$ the free rate is $\Pi$, and with $\chi = 1$ it is $\Pi_{t-1}$. It depends only on aggregate variables that are known at date $t$, so the firm takes it as given.
+
+\paragraph{Why the problem is dynamic.} The cost at date $t$ depends on the previous price $p_{it-1}$, so the cost at date $t+1$ depends on $p_{it}$. The firm cannot maximize date by date. It maximizes the value of the whole stream of profits.
+
+\paragraph{Discounting.} The firm pays its profits to the household. One unit of the final good at date $t$ is worth $\lambda_t$ units of utility to the household, and utility at date $t$ is discounted by $\beta^t$. The firm therefore values the profits of date $t$ with the weight $\beta^t \lambda_t$ and, given the initial price $p_{i,-1}$, solves
 \begin{equation*}
 \max_{\{p_{it}\}} \ \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \lambda_t \left\{ \left( \frac{p_{it}}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t \right\} .
 \end{equation*}
-The price $p_{it}$ appears in the date $t$ profits and in the date $t+1$ adjustment cost, where it is the base price. The first-order condition is
+
+\paragraph{The first-order condition.} The price $p_{it}$ appears in three places. It appears in the revenue and the production cost of date $t$, in the adjustment cost of date $t$ as the new price, and in the adjustment cost of date $t+1$ as the previous price. The derivative with respect to $p_{it}$ is
 \begin{multline*}
 \lambda_t \left\{ (1-\epsilon) \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} \frac{y_t}{p_t}
 + \epsilon\, mc_t \left( \frac{p_{it}}{p_t} \right)^{-\epsilon-1} \frac{y_t}{p_t}
 - \psi \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right) \frac{y_t}{\Phi_t\, p_{it-1}} \right\} \\
 + \beta\, \mathbb{E}_t \left[ \lambda_{t+1}\, \psi \left( \frac{p_{it+1}}{\Phi_{t+1}\, p_{it}} - 1 \right) \frac{p_{it+1}}{\Phi_{t+1}\, p_{it}^2}\, y_{t+1} \right] = 0 .
 \end{multline*}
-All firms face the same problem, so in the symmetric equilibrium $p_{it} = p_t$ for all $i$. Then $p_{it}/(\Phi_t p_{it-1}) = \Pi_t/\Phi_t$. Multiply the condition by $p_t/(\lambda_t y_t)$,
+The first two terms are the derivatives of the revenue and of the production cost. The third term is the extra adjustment cost paid today for a higher price. The last term is the adjustment cost saved tomorrow, because a higher price today means a smaller increase tomorrow. The benchmark $\Phi_{t+1}$ contains $\Pi_t$, which is aggregate inflation and not the firm's own price growth, so it is not differentiated.
+
+\paragraph{Symmetric equilibrium.} All firms face the same problem. If they start from the same initial price they choose the same price at every date, and the price index gives $p_{it} = p_t$ for all $i$. Then $p_{it}/p_t = 1$ and $p_{it}/(\Phi_t\, p_{it-1}) = \Pi_t/\Phi_t$. Multiply the first-order condition by $p_t/(\lambda_t y_t)$,
 \begin{equation*}
 (1-\epsilon) + \epsilon\, mc_t - \psi \left( \frac{\Pi_t}{\Phi_t} - 1 \right) \frac{\Pi_t}{\Phi_t}
 + \psi \beta\, \mathbb{E}_t \left[ \frac{\lambda_{t+1}}{\lambda_t} \left( \frac{\Pi_{t+1}}{\Phi_{t+1}} - 1 \right) \frac{\Pi_{t+1}}{\Phi_{t+1}} \frac{y_{t+1}}{y_t} \right] = 0,
 \end{equation*}
-which is the Phillips curve of the previous subsection. Without the adjustment cost, $\psi = 0$, it reduces to the flexible-price markup rule $mc_t = (\epsilon-1)/\epsilon$.
+which is the Phillips curve of the previous subsection. Without the adjustment cost, $\psi = 0$, it reduces to $mc_t = (\epsilon-1)/\epsilon$, which says that the price is the markup $\epsilon/(\epsilon-1)$ over marginal cost. With the cost, the marginal cost can differ from $(\epsilon-1)/\epsilon$. When it is higher, firms want higher prices, and inflation rises above the benchmark $\Phi_t$ only as far as the adjustment costs of today and tomorrow allow.
 
 \subsubsection{Aggregation and market clearing}
 
@@ -231,7 +261,16 @@ In the symmetric equilibrium all firms set the same price, so $y_{it} = y_t$, $k
 \begin{equation*}
 y_t = e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha} .
 \end{equation*}
-Aggregate profits are output minus factor payments minus the adjustment cost,
+The household owns two kinds of firms. The final good producer has zero profits, so the profits $F_t$ in the household budget constraint are the profits of the intermediate firms. Real profits of intermediate firm $i$ are revenue minus factor payments minus the adjustment cost,
+\begin{equation*}
+F_{it} = \frac{p_{it}}{p_t}\, y_{it} - w_t l_{it} - r_t k_{it-1} - \frac{\psi}{2} \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 y_t .
+\end{equation*}
+Integrate over the firms,
+\begin{equation*}
+F_t = \int_0^1 F_{it}\, di
+= \frac{1}{p_t} \int_0^1 p_{it}\, y_{it}\, di - w_t \int_0^1 l_{it}\, di - r_t \int_0^1 k_{it-1}\, di - \frac{\psi}{2}\, y_t \int_0^1 \left( \frac{p_{it}}{\Phi_t\, p_{it-1}} - 1 \right)^2 di .
+\end{equation*}
+The first integral is $p_t y_t$ by the zero profit condition of the final good producer. The second and the third are the labor and capital market clearing conditions, $\int_0^1 l_{it}\, di = l_t$ and $\int_0^1 k_{it-1}\, di = k_{t-1}$. In the symmetric equilibrium $p_{it}/(\Phi_t\, p_{it-1}) = \Pi_t/\Phi_t$ for all $i$, so the last integral is $(\Pi_t/\Phi_t - 1)^2$. Aggregate profits are therefore output minus factor payments minus the adjustment cost,
 \begin{equation*}
 F_t = y_t - w_t l_t - r_t k_{t-1} - \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t .
 \end{equation*}

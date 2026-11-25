@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.29)  18 NOV 2026 16:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.29)  24 NOV 2026 20:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -417,16 +417,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
 (/home/mahdiebk/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [2]
-[3] [4]
-Overfull \hbox (9.09734pt too wide) in paragraph at lines 220--222
-\T1/cmr/m/n/10.95 All firms face the same prob-lem, so in the sym-met-ric equi-
-lib-rium $\OML/cmm/m/it/10.95 p[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 p[]$
- \T1/cmr/m/n/10.95 for all $\OML/cmm/m/it/10.95 i$\T1/cmr/m/n/10.95 . Then $\OM
-L/cmm/m/it/10.95 p[]=\OT1/cmr/m/n/10.95 (^^H[]\OML/cmm/m/it/10.95 p[]\OT1/cmr/m
-/n/10.95 ) =
- []
-
-[5] [6] (./rough_notes.aux)
+[3] [4] [5] [6] [7] [8] (./rough_notes.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
@@ -435,13 +426,13 @@ Package rerunfilecheck Info: File `rough_notes.out' has not changed.
 (rerunfilecheck)             Checksum: D29FC1F89F378116AADB934C4C236A3C;1837.
  ) 
 Here is how much of TeX's memory you used:
- 10997 strings out of 468580
- 166271 string characters out of 5444298
+ 11006 strings out of 468580
+ 166360 string characters out of 5444298
  603833 words of memory out of 5000000
  39937 multiletter control sequences out of 15000+600000
  640305 words of font info for 69 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 74i,11n,79p,1306b,462s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,79p,1306b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.
 600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
 200.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/e
@@ -462,10 +453,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mahdiebk/texlive/2025
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></home/mahdiebk/texlive/20
 25/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/mahdiebk/texlive/
 2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on rough_notes.pdf (6 pages, 199059 bytes).
+Output written on rough_notes.pdf (8 pages, 208454 bytes).
 PDF statistics:
- 428 PDF objects out of 1000 (max. 8388607)
- 177 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 452 PDF objects out of 1000 (max. 8388607)
+ 193 compressed objects within 2 object streams
+ 59 named destinations out of 1000 (max. 500000)
  89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
