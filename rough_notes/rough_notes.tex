@@ -8,6 +8,9 @@
 \usepackage{xcolor}
 \usepackage[colorlinks=true, citecolor=blue, linkcolor=black, urlcolor=blue]{hyperref}
 
+\newtheorem*{envelope}{Envelope theorem}
+\newtheorem*{envelopedyn}{Envelope condition (Benveniste and Scheinkman)}
+
 \title{Rough notes}
 \author{}
 \date{\today}
@@ -301,5 +304,393 @@ c = y - \delta k, \qquad
 \lambda = \frac{1}{c}, \qquad
 \phi = \frac{w}{c} .
 \end{equation*}
+
+\section{NK (Calvo)}
+
+\subsection{The equations}
+
+\paragraph{Household.} The representative household maximizes
+\begin{equation*}
+\mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \left\{ \log c_t - \phi \frac{l_t^{1+\eta}}{1+\eta} \right\}
+\end{equation*}
+subject to
+\begin{equation*}
+c_t + k_t + \frac{b_{t+1}}{p_t} = w_t l_t + (1 + r_t - \delta) k_{t-1} + R_{t-1} \frac{b_t}{p_t} + T_t + F_t .
+\end{equation*}
+With $\lambda_t$ the multiplier on the budget constraint and $\Pi_t = p_t/p_{t-1}$, the first-order conditions are
+\begin{align}
+\frac{1}{c_t} &= \lambda_t, \\
+\phi\, l_t^{\eta} &= \lambda_t w_t, \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{\Pi_{t+1}} \right], \\
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right].
+\end{align}
+
+\paragraph{Final good producer.} The final good is $y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}}$. The demand for variety $i$ and the price index are
+\begin{equation}
+y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t, \qquad
+p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
+\end{equation}
+
+\paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost, common across firms,
+\begin{align}
+\frac{k_{it-1}}{l_{it}} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
+mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} .
+\end{align}
+Pricing follows Calvo: each period a fraction $1-\theta$ of firms, drawn at random, reset their price, while the remaining fraction $\theta$ keep theirs. Let $\Pi_t^{*} = p_t^{*}/p_t$ be the relative reset price. The price index implies
+\begin{equation}
+\Pi_t^{*} = \left( \frac{1 - \theta\, \Pi_t^{\epsilon-1}}{1-\theta} \right)^{\frac{1}{1-\epsilon}} ,
+\end{equation}
+and the price dispersion $v_t \equiv \int_0^1 (p_{it}/p_t)^{-\epsilon} di$ follows the recursion
+\begin{equation}
+v_t = \theta\, \Pi_t^{\epsilon}\, v_{t-1} + (1-\theta)\, (\Pi_t^{*})^{-\epsilon} .
+\end{equation}
+The optimal reset price is characterized by two forward-looking sums,
+\begin{align}
+g_{1t} &= \lambda_t\, mc_t\, y_t + \beta\theta\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon}\, g_{1t+1} \right], \\
+g_{2t} &= \lambda_t\, \Pi_t^{*}\, y_t + \beta\theta\, \Pi_t^{*}\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon-1}\, \frac{g_{2t+1}}{\Pi_{t+1}^{*}} \right],
+\end{align}
+together with the optimality condition
+\begin{equation}
+g_{2t} = \frac{\epsilon}{\epsilon-1}\, g_{1t} .
+\end{equation}
+
+\paragraph{Government.} The central bank follows the Taylor rule
+\begin{equation}
+R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
+\end{equation}
+where $R$ and $\Pi$ are the steady-state values. This is the output-growth rule the code uses, with $\gamma_\Pi = 2$ and $\gamma_{\Delta y} = 0.5$.
+
+\paragraph{Market clearing.}
+\begin{align}
+y_t &= \frac{e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha}}{v_t}, \\
+c_t + k_t &= y_t + (1-\delta) k_{t-1} .
+\end{align}
+
+\paragraph{Shocks.}
+\begin{align}
+z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
+\xi_t &= \rho_m \xi_{t-1} + \sigma_m \varepsilon_{m,t},
+\end{align}
+with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
+
+\paragraph{State and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, v_{t-1}, y_{t-1})$. Lagged dispersion $v_{t-1}$ is a state because dispersion follows the recursion above, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $(k_t, l_t, \Pi_t, g_{1t})$. The reset price $\Pi_t^{*}$ follows from $\Pi_t$, and $g_{2t}$ follows from $g_{1t}$ through the optimality condition.
+
+\subsection{Derivations}
+
+\subsubsection{The household, the final good producer, and cost minimization}
+
+The household problem, the final good producer, and the intermediate firm's cost minimization are identical to the Rotemberg model. The derivations in that section carry over without change: they give the four household conditions, the demand function and price index, and the factor ratio and marginal cost. Only the pricing block and the aggregation differ, which we derive next.
+
+\subsubsection{The intermediate firm: Calvo pricing}
+
+\paragraph{What the firm chooses.} Each period a fraction $1-\theta$ of firms, drawn at random and independently of their history, may reset their price. The remaining fraction $\theta$ keep the price they had. A firm that resets at date $t$ chooses a price $p_t^{*}$ and keeps it until it is next allowed to reset. The probability that the firm still charges this price $j$ periods later is $\theta^j$. Because all resetting firms face the same problem, they choose the same price $p_t^{*}$.
+
+\paragraph{Period profits.} A firm that charges the price $p$ at date $t$ sells $y_{it} = (p/p_t)^{-\epsilon} y_t$ and earns real profits $(p/p_t)\, y_{it} - mc_t\, y_{it}$. The firm pays its profits to the household, so it values them with the weight $\lambda_t$. Let $S_t$ be the aggregate state at date $t$. In utility units the period profits are
+\begin{equation*}
+\pi(p, S_t) = \lambda_t \left[ \left( \frac{p}{p_t} \right)^{1-\epsilon} y_t - mc_t \left( \frac{p}{p_t} \right)^{-\epsilon} y_t \right] .
+\end{equation*}
+The firm takes $\lambda_t$, $mc_t$, $y_t$ and the price level $p_t$ as given. They are functions of the aggregate state $S_t$, which contains the shocks, the aggregate capital stock, the price dispersion, lagged output and the price level.
+
+\paragraph{The Bellman equation.} The individual state of the firm is the price $p$ it charges. Let $V(p, S)$ be the value of a firm whose price is $p$ when the aggregate state is $S$, and let $V^{*}(S)$ be the value of a firm that resets,
+\begin{equation*}
+V^{*}(S) = \max_{p} \ V(p, S) .
+\end{equation*}
+Next period the aggregate state is $S'$. The firm keeps its price with probability $\theta$ and resets with probability $1-\theta$, so
+\begin{equation*}
+V(p, S) = \pi(p, S) + \beta\, \mathbb{E} \left[ \theta\, V(p, S') + (1-\theta)\, V^{*}(S') \, \middle| \, S \right] .
+\end{equation*}
+This has the structure of a McCall problem. The value of a new draw, $V^{*}(S')$, does not depend on the price the firm holds today.
+
+\paragraph{The first-order condition and the envelope condition.} Let $V_p$ be the derivative of $V$ with respect to the price $p$. The reset price $p^{*}(S)$ solves the maximization in $V^{*}(S)$, so
+\begin{equation*}
+V_p \left( p^{*}(S), S \right) = 0 .
+\end{equation*}
+Differentiate the Bellman equation with respect to $p$. The reset branch drops out because $V^{*}(S')$ does not depend on $p$,
+\begin{equation*}
+V_p(p, S) = \pi_p(p, S) + \beta\theta\, \mathbb{E} \left[ V_p(p, S') \, \middle| \, S \right] .
+\end{equation*}
+
+\paragraph{Iterating the envelope condition.} Write the envelope condition at date $t$,
+\begin{equation*}
+V_p(p, S_t) = \pi_p(p, S_t) + \beta\theta\, \mathbb{E}_t \left[ V_p(p, S_{t+1}) \right] .
+\end{equation*}
+The same condition holds at date $t+1$ for the same price $p$,
+\begin{equation*}
+V_p(p, S_{t+1}) = \pi_p(p, S_{t+1}) + \beta\theta\, \mathbb{E}_{t+1} \left[ V_p(p, S_{t+2}) \right] .
+\end{equation*}
+Substitute the second equation into the first. By the law of iterated expectations, $\mathbb{E}_t [ \mathbb{E}_{t+1} [ \cdot ] ] = \mathbb{E}_t [ \cdot ]$, so
+\begin{equation*}
+V_p(p, S_t) = \pi_p(p, S_t) + \beta\theta\, \mathbb{E}_t \left[ \pi_p(p, S_{t+1}) \right] + (\beta\theta)^2\, \mathbb{E}_t \left[ V_p(p, S_{t+2}) \right] .
+\end{equation*}
+After $J$ substitutions,
+\begin{equation*}
+V_p(p, S_t) = \mathbb{E}_t \sum_{j=0}^{J-1} (\beta\theta)^{j}\, \pi_p(p, S_{t+j}) + (\beta\theta)^{J}\, \mathbb{E}_t \left[ V_p(p, S_{t+J}) \right] .
+\end{equation*}
+Since $\beta\theta < 1$, the last term goes to zero as $J \to \infty$, and
+\begin{equation*}
+V_p(p, S_t) = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j}\, \pi_p(p, S_{t+j}) .
+\end{equation*}
+
+\paragraph{From the derivative to the textbook problem.} Define the expected discounted profits that the firm earns while it still charges $p$,
+\begin{equation*}
+W(p, S_t) = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j}\, \pi(p, S_{t+j}) .
+\end{equation*}
+The weight $(\beta\theta)^j$ combines the household discount factor $\beta^j$ and the probability $\theta^j$ that the firm has not reset for $j$ periods. The period profits are smooth in $p$ and the sum is discounted by $\beta\theta < 1$, so the derivative with respect to $p$ passes through the sum and the expectation,
+\begin{equation*}
+W_p(p, S_t) = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j}\, \pi_p(p, S_{t+j}) .
+\end{equation*}
+The right-hand side is the same as in the iterated envelope condition, so $V_p(p, S_t) = W_p(p, S_t)$ for every $p$. Two functions of $p$ with the same derivative differ by a constant. The constant does not depend on $p$, but it can depend on the aggregate state,
+\begin{equation*}
+V(p, S_t) = W(p, S_t) + C(S_t) .
+\end{equation*}
+Therefore $V$ and $W$ have the same maximizer,
+\begin{equation*}
+\arg\max_{p} \ V(p, S_t) = \arg\max_{p} \ W(p, S_t) .
+\end{equation*}
+Substitute the period profits into $W$. The firm that resets at date $t$ solves
+\begin{equation*}
+\max_{p_t^{*}} \ \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j} \left[ \left( \frac{p_t^{*}}{p_{t+j}} \right)^{1-\epsilon} y_{t+j} - mc_{t+j} \left( \frac{p_t^{*}}{p_{t+j}} \right)^{-\epsilon} y_{t+j} \right] ,
+\end{equation*}
+which is the textbook statement of the Calvo problem.
+
+\paragraph{The reset price.} The first-order condition of this problem with respect to $p_t^{*}$, multiplied by $p_t^{*}$, is
+\begin{equation*}
+\mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j} \left[ (1-\epsilon) \left( \frac{p_t^{*}}{p_{t+j}} \right)^{1-\epsilon} y_{t+j} + \epsilon\, mc_{t+j} \left( \frac{p_t^{*}}{p_{t+j}} \right)^{-\epsilon} y_{t+j} \right] = 0 .
+\end{equation*}
+Rearrange,
+\begin{equation*}
+(\epsilon-1)\, \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j} \left( \frac{p_t^{*}}{p_{t+j}} \right)^{1-\epsilon} y_{t+j}
+= \epsilon\, \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j}\, mc_{t+j} \left( \frac{p_t^{*}}{p_{t+j}} \right)^{-\epsilon} y_{t+j} .
+\end{equation*}
+Write the relative reset price $\Pi_t^{*} = p_t^{*}/p_t$ and use $p_t^{*}/p_{t+j} = \Pi_t^{*}\, (p_t/p_{t+j})$. Define the two forward-looking sums
+\begin{equation*}
+A_t = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j}\, mc_{t+j} \left( \frac{p_{t+j}}{p_t} \right)^{\epsilon} y_{t+j},
+\qquad
+B_t = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j} \lambda_{t+j} \left( \frac{p_{t+j}}{p_t} \right)^{\epsilon-1} y_{t+j} .
+\end{equation*}
+Then the first-order condition reduces to $(\epsilon-1)\, (\Pi_t^{*})^{1-\epsilon} B_t = \epsilon\, (\Pi_t^{*})^{-\epsilon} A_t$, that is,
+\begin{equation*}
+\Pi_t^{*} = \frac{\epsilon}{\epsilon-1} \frac{A_t}{B_t} .
+\end{equation*}
+This is the familiar result that the reset price is the markup $\epsilon/(\epsilon-1)$ over a discounted ratio of future marginal costs.
+
+\paragraph{Recursive form.} Both sums are recursive, which is the envelope condition again, written separately for the cost part and the revenue part and scaled by the price level. Splitting off the $j=0$ term and using $(p_{t+j}/p_t)^{\epsilon} = \Pi_{t+1}^{\epsilon} (p_{t+j}/p_{t+1})^{\epsilon}$ for $j \ge 1$,
+\begin{equation*}
+A_t = \lambda_t\, mc_t\, y_t + \beta\theta\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon}\, A_{t+1} \right],
+\qquad
+B_t = \lambda_t\, y_t + \beta\theta\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon-1}\, B_{t+1} \right] .
+\end{equation*}
+Let $g_{1t} = A_t$ and $g_{2t} = \Pi_t^{*}\, B_t$. The first recursion is $g_{1t}$ as stated above. For the second, multiply the $B_t$ recursion by $\Pi_t^{*}$ and use $B_{t+1} = g_{2t+1}/\Pi_{t+1}^{*}$,
+\begin{equation*}
+g_{2t} = \lambda_t\, \Pi_t^{*}\, y_t + \beta\theta\, \Pi_t^{*}\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon-1}\, \frac{g_{2t+1}}{\Pi_{t+1}^{*}} \right] .
+\end{equation*}
+The optimality condition $\Pi_t^{*} = \tfrac{\epsilon}{\epsilon-1} A_t/B_t$ becomes $\Pi_t^{*} = \tfrac{\epsilon}{\epsilon-1}\, g_{1t} \Pi_t^{*}/g_{2t}$, i.e.,
+\begin{equation*}
+g_{2t} = \frac{\epsilon}{\epsilon-1}\, g_{1t} .
+\end{equation*}
+
+\paragraph{The price index and the reset price.} The price level aggregates the prices that firms charge at date $t$. A fraction $1-\theta$ of firms charge $p_t^{*}$ and the rest carry their old prices, which average to $p_{t-1}$ in the index. The CES price index gives $p_t^{1-\epsilon} = \theta\, p_{t-1}^{1-\epsilon} + (1-\theta)\, (p_t^{*})^{1-\epsilon}$. Divide by $p_t^{1-\epsilon}$,
+\begin{equation*}
+1 = \theta\, \Pi_t^{\epsilon-1} + (1-\theta)\, (\Pi_t^{*})^{1-\epsilon}
+\quad \Longrightarrow \quad
+\Pi_t^{*} = \left( \frac{1 - \theta\, \Pi_t^{\epsilon-1}}{1-\theta} \right)^{\frac{1}{1-\epsilon}} .
+\end{equation*}
+
+\subsubsection{Price dispersion and aggregation}
+
+\paragraph{Aggregate production.} The final good is
+\begin{equation*}
+y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}} .
+\end{equation*}
+We want $y_t$ as a function of aggregate capital and labor. Start from the labor market clearing condition,
+\begin{equation*}
+l_t = \int_0^1 l_{it}\, di ,
+\end{equation*}
+and write the labor of firm $i$ in terms of $y_t$.
+
+First, the production function of firm $i$ is
+\begin{equation*}
+y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha} = e^{z_t} \left( \frac{k_{it-1}}{l_{it}} \right)^{\alpha} l_{it} .
+\end{equation*}
+By cost minimization every firm has the same capital-labor ratio, which therefore equals the aggregate ratio $k_{t-1}/l_t$. Solve for the labor of firm $i$,
+\begin{equation*}
+l_{it} = \frac{y_{it}}{e^{z_t} \left( k_{t-1}/l_t \right)^{\alpha}} .
+\end{equation*}
+
+Second, firm $i$ produces the quantity that the final good producer demands at its price, $y_{it} = (p_{it}/p_t)^{-\epsilon} y_t$. This demand function comes from the CES aggregator. Substitute it,
+\begin{equation*}
+l_{it} = \frac{y_t}{e^{z_t} \left( k_{t-1}/l_t \right)^{\alpha}} \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} .
+\end{equation*}
+
+Third, integrate over $i$. The first factor does not depend on $i$, so it comes out of the integral,
+\begin{equation*}
+l_t = \int_0^1 l_{it}\, di = \frac{y_t}{e^{z_t} \left( k_{t-1}/l_t \right)^{\alpha}} \int_0^1 \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} di .
+\end{equation*}
+Define the price dispersion as the remaining integral,
+\begin{equation*}
+v_t \equiv \int_0^1 \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} di .
+\end{equation*}
+
+Fourth, solve for $y_t$,
+\begin{equation*}
+y_t = \frac{e^{z_t} \left( k_{t-1}/l_t \right)^{\alpha} l_t}{v_t} = \frac{e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha}}{v_t} .
+\end{equation*}
+
+\paragraph{Dispersion is a loss.} Let $x_{it} = (p_{it}/p_t)^{1-\epsilon}$. The price index $p_t^{1-\epsilon} = \int_0^1 p_{it}^{1-\epsilon} di$ says that $\int_0^1 x_{it}\, di = 1$. The dispersion is $v_t = \int_0^1 x_{it}^{\frac{\epsilon}{\epsilon-1}} di$. The exponent $\epsilon/(\epsilon-1)$ is larger than one, so the function is convex, and Jensen's inequality gives
+\begin{equation*}
+v_t = \int_0^1 x_{it}^{\frac{\epsilon}{\epsilon-1}} di \ \ge \ \left( \int_0^1 x_{it}\, di \right)^{\frac{\epsilon}{\epsilon-1}} = 1 .
+\end{equation*}
+Equality holds only when all prices are equal. With the same capital and labor, more price dispersion gives less of the final good. The reason is that the household buys too much of the cheap varieties and too little of the expensive ones, although all varieties cost the same to produce.
+
+\paragraph{The recursion for dispersion.} At date $t$ the firms are in two groups. The first group, of size $1-\theta$, resets. All of them charge $p_t^{*}$, so their part of the integral is
+\begin{equation*}
+(1-\theta) \left( \frac{p_t^{*}}{p_t} \right)^{-\epsilon} = (1-\theta)\, (\Pi_t^{*})^{-\epsilon} .
+\end{equation*}
+The second group, of size $\theta$, does not reset. Firm $i$ in this group charges its previous price, $p_{it} = p_{it-1}$. The firms in this group are drawn at random, independently of their prices, so the distribution of the previous prices in this group is the same as among all firms. Their part of the integral is therefore $\theta$ times the integral over all firms,
+\begin{equation*}
+\theta \int_0^1 \left( \frac{p_{it-1}}{p_t} \right)^{-\epsilon} di .
+\end{equation*}
+Multiply and divide by $p_{t-1}$ inside the bracket and use $\Pi_t = p_t/p_{t-1}$,
+\begin{equation*}
+\left( \frac{p_{it-1}}{p_t} \right)^{-\epsilon}
+= \left( \frac{p_{it-1}}{p_{t-1}} \right)^{-\epsilon} \left( \frac{p_{t-1}}{p_t} \right)^{-\epsilon}
+= \left( \frac{p_{it-1}}{p_{t-1}} \right)^{-\epsilon} \Pi_t^{\epsilon} .
+\end{equation*}
+Inflation $\Pi_t$ does not depend on $i$, so it comes out of the integral, and what is left is the dispersion of the previous period,
+\begin{equation*}
+\theta \int_0^1 \left( \frac{p_{it-1}}{p_t} \right)^{-\epsilon} di
+= \theta\, \Pi_t^{\epsilon} \int_0^1 \left( \frac{p_{it-1}}{p_{t-1}} \right)^{-\epsilon} di
+= \theta\, \Pi_t^{\epsilon}\, v_{t-1} .
+\end{equation*}
+Add the two groups,
+\begin{equation*}
+v_t = (1-\theta)\, (\Pi_t^{*})^{-\epsilon} + \theta\, \Pi_t^{\epsilon}\, v_{t-1} .
+\end{equation*}
+The dispersion of date $t$ depends on the dispersion of date $t-1$, which is why $v_{t-1}$ is a state variable.
+
+\paragraph{Market clearing.} The household owns the firms. The final good producer makes zero profits, and the intermediate firms' profits $F_t$ are revenue minus factor payments. Unlike the Rotemberg model, there is no resource cost of changing prices: the friction shows up through $v_t$ in the production function, not as a quadratic loss. Substituting the firms' profits and the government budget constraint $T_t + R_{t-1} b_t/p_t = b_{t+1}/p_t$ into the household budget constraint, the bond terms, the wage bill, and the rental payments cancel, leaving the resource constraint
+\begin{equation*}
+c_t + k_t = y_t + (1-\delta) k_{t-1} .
+\end{equation*}
+
+\subsubsection{Monetary policy}
+
+The Taylor rule is not derived from an optimization problem. It is a behavioral rule that closes the model.
+
+\subsubsection{Steady state}
+
+Set all shocks to zero and all variables constant, so inflation equals the target, $\Pi = \Pi_{ss}$. The reset price and dispersion are
+\begin{equation*}
+\Pi^{*} = \left( \frac{1 - \theta\, \Pi^{\epsilon-1}}{1-\theta} \right)^{\frac{1}{1-\epsilon}},
+\qquad
+v = \frac{(1-\theta)\, (\Pi^{*})^{-\epsilon}}{1 - \theta\, \Pi^{\epsilon}} .
+\end{equation*}
+The two Euler equations give $R = \Pi/\beta$ and $r = 1/\beta - 1 + \delta$. Writing the reset-price recursions in steady state, with discount terms $1 - \beta\theta\, \Pi^{\epsilon}$ and $1 - \beta\theta\, \Pi^{\epsilon-1}$, and using $\epsilon\, g_1 = (\epsilon-1)\, g_2$, the marginal cost is
+\begin{equation*}
+mc = \frac{\epsilon-1}{\epsilon}\, \Pi^{*}\, \frac{1 - \beta\theta\, \Pi^{\epsilon}}{1 - \beta\theta\, \Pi^{\epsilon-1}} .
+\end{equation*}
+Invert the marginal cost formula for the wage, normalize $l = 1$, and let $\phi$ adjust,
+\begin{equation*}
+w = \left[ (1-\alpha)^{1-\alpha} \alpha^{\alpha}\, \frac{mc}{r^{\alpha}} \right]^{\frac{1}{1-\alpha}},
+\qquad
+k = \frac{\alpha}{1-\alpha} \frac{w}{r}, \qquad
+y = \frac{k^{\alpha}}{v}, \qquad
+c = y - \delta k, \qquad
+\lambda = \frac{1}{c}, \qquad
+\phi = \frac{w}{c} .
+\end{equation*}
+At the target $\Pi$ dispersion is above one when $\Pi \ne 1$, so steady-state output is below its frictionless level.
+
+\appendix
+
+\section{The envelope condition}
+
+\subsection{The question}
+
+An optimization problem depends on a parameter. When the parameter changes, the optimal choice changes, and the maximized value changes. The envelope theorem answers one question: how does the maximized value change? The answer is simpler than one would expect. To first order, the change in the optimal choice does not matter.
+
+\subsection{The static statement}
+
+Let $x$ be a choice and $a$ a parameter. Define the value function and the policy
+\begin{equation*}
+V(a) = \max_{x} \ f(x, a), \qquad x^{*}(a) = \arg\max_{x} \ f(x, a) .
+\end{equation*}
+
+\begin{envelope}
+Suppose $f$ is differentiable, the maximizer $x^{*}(a)$ is interior and differentiable in $a$. Then
+\begin{equation*}
+V'(a) = \frac{\partial f}{\partial a} \left( x^{*}(a), a \right) .
+\end{equation*}
+\end{envelope}
+
+In words: differentiate the objective with respect to the parameter, hold the choice fixed, and evaluate at the optimal choice.
+
+\paragraph{Proof.} By definition $V(a) = f(x^{*}(a), a)$. The chain rule gives
+\begin{equation*}
+V'(a) = \underbrace{\frac{\partial f}{\partial x} \left( x^{*}(a), a \right)}_{= \, 0} \, \frac{d x^{*}}{d a}(a) + \frac{\partial f}{\partial a} \left( x^{*}(a), a \right) .
+\end{equation*}
+The first term is the indirect effect, the change in the value because the choice moves. It is multiplied by $\partial f / \partial x$, which is zero at the optimum by the first-order condition. Only the direct effect is left.
+
+\paragraph{Intuition.} At the optimum the objective is flat in the choice. A small change in the choice has no first-order effect on the value. So when the parameter moves, we do not need to know how the choice responds.
+
+\paragraph{Why the name.} For each fixed $x$, the function $a \mapsto f(x, a)$ is a curve. The value function $V(a)$ is the upper envelope of this family of curves. At each $a$ it touches the curve of $x = x^{*}(a)$ and has the same slope there.
+
+\paragraph{Example.} A firm with price $p$ and cost function $c(y)$ has profits $\Pi(p) = \max_{y} \ p\, y - c(y)$. The envelope theorem gives $\Pi'(p) = y^{*}(p)$. A one dollar increase in the price raises profits by the quantity sold. The change in the quantity has no first-order effect. This is Hotelling's lemma.
+
+\subsection{The dynamic statement}
+
+Now let $x$ be a state variable and $x'$ its value next period. The Bellman equation is
+\begin{equation*}
+V(x) = \max_{x'} \ \left\{ F(x, x') + \beta\, V(x') \right\} ,
+\end{equation*}
+with the policy $x' = g(x)$. The state $x$ plays the role of the parameter $a$, and the choice is $x'$.
+
+\begin{envelopedyn}
+Suppose $F$ is differentiable and concave, and $g(x)$ is interior. Then $V$ is differentiable at $x$ and
+\begin{equation*}
+V'(x) = \frac{\partial F}{\partial x} \left( x, g(x) \right) .
+\end{equation*}
+\end{envelopedyn}
+
+The proof is the same as before. The state $x$ affects the right-hand side directly through $F$ and indirectly through the choice $x'$. The indirect effect is multiplied by the first-order condition
+\begin{equation*}
+\frac{\partial F}{\partial x'} \left( x, x' \right) + \beta\, V'(x') = 0 ,
+\end{equation*}
+so it vanishes. The continuation value $\beta V(x')$ depends on $x$ only through $x'$, so it adds no direct effect.
+
+\paragraph{Why we need it.} The first-order condition contains $V'(x')$, the derivative of an unknown function. The envelope condition replaces it with the derivative of the known function $F$. Shift the envelope condition one period forward and substitute it into the first-order condition,
+\begin{equation*}
+\frac{\partial F}{\partial x'} \left( x, x' \right) + \beta\, \frac{\partial F}{\partial x} \left( x', x'' \right) = 0 .
+\end{equation*}
+This is the Euler equation. The recipe is always the same: first-order condition, envelope condition, combine.
+
+\paragraph{Example: the growth model.} With $F(k, k') = u(f(k) - k')$, the first-order condition is $u'(c) = \beta V'(k')$ and the envelope condition is $V'(k) = u'(c)\, f'(k)$. Combining them gives $u'(c) = \beta\, u'(c')\, f'(k')$.
+
+\subsection{When the state survives into the continuation value}
+
+In the statement above the state $x$ appears only in the period return $F$. In some problems the state also appears directly in the continuation value. The rule does not change: differentiate everything in which the state appears directly, hold the choices fixed.
+
+\paragraph{The Calvo firm.} The state of the firm is its price $p$. The firm that does not reset has no choice to make, and its value is
+\begin{equation*}
+V(p, S) = \pi(p, S) + \beta\, \mathbb{E} \left[ \theta\, V(p, S') + (1-\theta)\, V^{*}(S') \, \middle| \, S \right] , \qquad V^{*}(S) = \max_{p} \ V(p, S) .
+\end{equation*}
+The price $p$ appears directly in three places. It appears in the period profits $\pi(p, S)$. It appears in the continuation value $V(p, S')$, because with probability $\theta$ the firm keeps the same price. It does not appear in $V^{*}(S')$, because a firm that resets chooses a new price and forgets the old one. Differentiating,
+\begin{equation*}
+V_p(p, S) = \pi_p(p, S) + \beta\theta\, \mathbb{E} \left[ V_p(p, S') \, \middle| \, S \right] .
+\end{equation*}
+Here the envelope condition does not remove $V_p$ from the right-hand side. It gives a recursion for $V_p$, which we solve by iterating forward from the state $S_t$ at date $t$,
+\begin{equation*}
+V_p(p, S_t) = \mathbb{E}_t \sum_{j=0}^{\infty} (\beta\theta)^{j}\, \pi_p(p, S_{t+j}) .
+\end{equation*}
+The first-order condition of the resetting firm, $V_p(p_t^{*}, S_t) = 0$, then gives the reset price.
+
+\subsection{What to remember}
+
+\begin{itemize}
+\item The derivative of the value function with respect to a state or a parameter is the direct effect only.
+\item The indirect effect through the optimal choice is zero by the first-order condition.
+\item In a Bellman equation: write the first-order condition, write the envelope condition, combine them to remove $V'$.
+\item The result needs an interior and differentiable solution. At a corner or a kink, for example an occasionally binding constraint, it has to be applied with care.
+\end{itemize}
 
 \end{document}

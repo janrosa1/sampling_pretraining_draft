@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.29)  24 NOV 2026 20:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.8.29)  26 NOV 2026 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -320,24 +320,24 @@ File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
 ) (./rough_notes.aux)
 \openout1 = `rough_notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -397,7 +397,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 15.
+Package hyperref Info: Link coloring ON on input line 18.
  (./rough_notes.out) (./rough_notes.out)
 \@outlinefile=\write3
 \openout3 = `rough_notes.out'.
@@ -405,58 +405,68 @@ Package hyperref Info: Link coloring ON on input line 15.
  [1
 
 {/home/mahdiebk/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 49.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
 
 
 (/home/mahdiebk/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
 
 
 (/home/mahdiebk/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [2]
-[3] [4] [5] [6] [7] [8] (./rough_notes.aux)
+[3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
+Overfull \hbox (1.10634pt too wide) detected at line 601
+\OML/cmm/m/it/10.95 w \OT1/cmr/m/n/10.95 = [][] \OML/cmm/m/it/10.95 ;  k \OT1/c
+mr/m/n/10.95 = [][]\OML/cmm/m/it/10.95 ;  y \OT1/cmr/m/n/10.95 = []\OML/cmm/m/i
+t/10.95 ;  c \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 y \OMS/cmsy/m/n/10.95 ^^@
+ \OML/cmm/m/it/10.95 ^^Nk;  ^^U \OT1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 ;  ^
+^^ \OT1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 :
+ []
+
+[15] [16] [17] (./rough_notes.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
 Package rerunfilecheck Info: File `rough_notes.out' has not changed.
-(rerunfilecheck)             Checksum: D29FC1F89F378116AADB934C4C236A3C;1837.
+(rerunfilecheck)             Checksum: 0B217050C84BBB601EB5E2EF19CF35C7;4448.
  ) 
 Here is how much of TeX's memory you used:
- 11006 strings out of 468580
- 166360 string characters out of 5444298
- 603833 words of memory out of 5000000
- 39937 multiletter control sequences out of 15000+600000
- 640305 words of font info for 69 fonts, out of 8000000 for 9000
+ 11101 strings out of 468580
+ 167652 string characters out of 5444298
+ 603921 words of memory out of 5000000
+ 39964 multiletter control sequences out of 15000+600000
+ 640646 words of font info for 70 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  74i,11n,79p,1306b,466s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.
-600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
-200.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-cti1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecbx1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecrm1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecbx1440.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecrm1200.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecrm1728.600pk></home/mahdiebk/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmex10.pfb></home/mahdiebk/texlive/2025/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi10.pfb></home/mahdiebk/texlive/2025/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></home/mahdiebk/texlive/2025/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi8.pfb></home/mahdiebk/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mahdiebk/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></home/mahdiebk/texlive/2025/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/mahdiebk/texlive/2025/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mahdiebk/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></home/mahdiebk/texlive/20
-25/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/mahdiebk/texlive/
-2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on rough_notes.pdf (8 pages, 208454 bytes).
+ </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.
+600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1
+095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+cbx1200.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/
+ec/ecti1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecbx1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecrm1095.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecbx1440.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecrm1200.600pk> </home/mahdiebk/.texlive2025/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm1728.600pk></home/mahdiebk/texlive/2025/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmex10.pfb></home/mahdiebk/texlive/2025/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/mahdiebk/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></home/mahdiebk/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></home/mahdiebk/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/mahdiebk/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></home/mahdiebk/texlive/2025
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/mahdiebk/texlive/202
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/mahdiebk/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></home/mahdiebk/texliv
+e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/mahdiebk/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on rough_notes.pdf (17 pages, 260971 bytes).
 PDF statistics:
- 452 PDF objects out of 1000 (max. 8388607)
- 193 compressed objects within 2 object streams
- 59 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 645 PDF objects out of 1000 (max. 8388607)
+ 338 compressed objects within 4 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 

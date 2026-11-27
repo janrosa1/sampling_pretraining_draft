@@ -257,7 +257,7 @@ along impulse responses and simulated paths, even in this case.
 
 \subsection{New Keynesian: Rotemberg Pricing}\label{sec:app-rotemberg}
 
-We consider a standard New Keynesian economy with capital accumulation and nominal rigidities. A representative household consumes, supplies labor, and saves in physical capital and nominal bonds. A competitive final-good producer aggregates a continuum of differentiated varieties, each supplied by a monopolistically competitive intermediate firm that rents capital and hires labor to produce under a technology subject to an aggregate productivity shock. Price stickiness takes the Rotemberg form, where firms face a quadratic cost of adjusting their nominal price. Monetary policy follows a Taylor rule that responds to inflation and output growth and includes a monetary policy shock. The two exogenous shocks, to productivity and to the policy rate, are the only sources of aggregate uncertainty.
+We consider a standard New Keynesian economy with capital accumulation and nominal rigidities. A representative household consumes, supplies labor, and saves in physical capital and nominal bonds. A competitive final-good producer aggregates a continuum of differentiated intermediate goods, each supplied by a monopolistically competitive intermediate firm that rents capital and hires labor to produce under a technology subject to an aggregate productivity shock. Price stickiness takes the Rotemberg form, where firms face a quadratic cost of adjusting their nominal price. Monetary policy follows a Taylor rule that responds to inflation and output growth and includes a monetary policy shock. The two exogenous shocks, to productivity and to the policy rate, are the only sources of aggregate uncertainty.
 
 \paragraph{Household.} The representative household maximizes
 \begin{equation*}
@@ -269,22 +269,22 @@ c_t + k_t + \frac{b_{t+1}}{p_t} = w_t l_t + (1 + r_t - \delta) k_{t-1} + R_{t-1}
 \end{equation*}
 With $\lambda_t$ the multiplier on the budget constraint and $\Pi_t = p_t/p_{t-1}$, the first-order conditions are
 \begin{align}
-\frac{1}{c_t} &= \lambda_t, \\
+\frac{1}{c_t} &= \lambda_t, \label{eq:hh-foc-c} \\
 \phi\, l_t^{\eta} &= \lambda_t w_t, \\
 \lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} \frac{R_t}{\Pi_{t+1}} \right], \\
-\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right].
+\lambda_t &= \beta\, \mathbb{E}_t \left[ \lambda_{t+1} (1 + r_{t+1} - \delta) \right]. \label{eq:hh-foc-capital}
 \end{align}
 
-\paragraph{Final good producer.} The final good is $y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}}$. The demand for variety $i$ and the price index are
+\paragraph{Final good producer.} The final good is $y_t = \left( \int_0^1 y_{it}^{\frac{\epsilon-1}{\epsilon}} di \right)^{\frac{\epsilon}{\epsilon-1}}$. The demand for intermediate good $i$ and the price index are
 \begin{equation}
 y_{it} = \left( \frac{p_{it}}{p_t} \right)^{-\epsilon} y_t, \qquad
-p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} .
+p_t = \left( \int_0^1 p_{it}^{1-\epsilon} di \right)^{\frac{1}{1-\epsilon}} . \label{eq:final-good}
 \end{equation}
 
 \paragraph{Intermediate good producers.} Firm $i$ produces $y_{it} = e^{z_t} k_{it-1}^{\alpha} l_{it}^{1-\alpha}$. Cost minimization gives the factor ratio and the real marginal cost,
 \begin{align}
-\frac{k_{it-1}}{l_{it}} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \\
-mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} ,
+\frac{k_{it-1}}{l_{it}} &= \frac{\alpha}{1-\alpha} \frac{w_t}{r_t}, \label{eq:factor-ratio} \\
+mc_t &= \left( \frac{1}{1-\alpha} \right)^{1-\alpha} \left( \frac{1}{\alpha} \right)^{\alpha} \frac{w_t^{1-\alpha} r_t^{\alpha}}{e^{z_t}} , \label{eq:mc}
 \end{align}
 which is common across all intermediate firms.
 The firm chooses its price subject to a quadratic adjustment cost,
@@ -304,7 +304,7 @@ In the symmetric equilibrium the first-order condition is the New Keynesian Phil
 
 \paragraph{Government.} The central bank follows the Taylor rule
 \begin{equation}
-R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t},
+R_t = R \left( \frac{\Pi_t}{\Pi} \right)^{\gamma_\Pi} \left( \frac{y_t}{y_{t-1}} \right)^{\gamma_{\Delta y}} e^{\xi_t}, \label{eq:taylor}
 \end{equation}
 where $R$ and $\Pi$ are the steady-state values. This is the output-growth rule, with $\gamma_\Pi = 2$ and $\gamma_{\Delta y} = 0.5$.
 
@@ -316,8 +316,8 @@ c_t + k_t + \frac{\psi}{2} \left( \frac{\Pi_t}{\Phi_t} - 1 \right)^2 y_t &= y_t 
 
 \paragraph{Shocks.}
 \begin{align}
-z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \\
-\xi_t &= \rho_m \xi_{t-1} + \sigma_m \varepsilon_{m,t},
+z_t &= \rho z_{t-1} + \sigma_z \varepsilon_{z,t}, \label{eq:shock-z} \\
+\xi_t &= \rho_m \xi_{t-1} + \sigma_m \varepsilon_{m,t}, \label{eq:shock-m}
 \end{align}
 with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 
@@ -327,7 +327,38 @@ with $\varepsilon_{z,t}, \varepsilon_{m,t} \sim \mathcal{N}(0,1)$.
 
 \subsection{New Keynesian: Calvo Pricing}\label{sec:app-calvo}
 
-% CALVO PLACEHOLDER
+This economy is identical to the one in \cref{sec:app-rotemberg}, except for the way prices are set. Intermediate firms do not pay an adjustment cost to change their price. Each period a firm is allowed to change its price with probability $1-\theta$, and with probability $\theta$ it has to keep the price it had in the previous period.
+
+\paragraph{Household.} The problem of the household and its first-order conditions are the same as equations \crefrange{eq:hh-foc-c}{eq:hh-foc-capital}.
+
+\paragraph{Final good producer.} The demand for intermediate good $i$ and the price index are the same as equation \cref{eq:final-good}.
+
+\paragraph{Intermediate good producers.} The production function, the factor ratio, and the real marginal cost are the same as equations \cref{eq:factor-ratio} and \cref{eq:mc}. Each period a randomly chosen fraction $1-\theta$ of firms reset their price. The other firms keep the price they had in the previous period. Let $\Pi_t^{*} = p_t^{*}/p_t$ be the relative reset price. The price index implies
+\begin{equation}
+\Pi_t^{*} = \left( \frac{1 - \theta\, \Pi_t^{\epsilon-1}}{1-\theta} \right)^{\frac{1}{1-\epsilon}} ,
+\end{equation}
+and the price dispersion $v_t \equiv \int_0^1 (p_{it}/p_t)^{-\epsilon} di$ follows
+\begin{equation}
+v_t = \theta\, \Pi_t^{\epsilon}\, v_{t-1} + (1-\theta)\, (\Pi_t^{*})^{-\epsilon} .
+\end{equation}
+The optimal reset price is characterized by
+\begin{align}
+g_{1t} &= \lambda_t\, mc_t\, y_t + \beta\theta\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon}\, g_{1t+1} \right], \\
+g_{2t} &= \lambda_t\, \Pi_t^{*}\, y_t + \beta\theta\, \Pi_t^{*}\, \mathbb{E}_t \left[ \Pi_{t+1}^{\epsilon-1}\, \frac{g_{2t+1}}{\Pi_{t+1}^{*}} \right], \\
+g_{2t} &= \frac{\epsilon}{\epsilon-1}\, g_{1t} .
+\end{align}
+
+\paragraph{Government.} The Taylor rule is the same as equation \cref{eq:taylor}.
+
+\paragraph{Market clearing.}
+\begin{align}
+y_t &= \frac{e^{z_t} k_{t-1}^{\alpha} l_t^{1-\alpha}}{v_t}, \\
+c_t + k_t &= y_t + (1-\delta) k_{t-1} .
+\end{align}
+
+\paragraph{Shocks.} The shocks are the same as equations \cref{eq:shock-z} and \cref{eq:shock-m}.
+
+\paragraph{State space and policy.} The state is $s_t = (z_t, k_{t-1}, \xi_t, v_{t-1}, y_{t-1})$. Lagged dispersion $v_{t-1}$ is a state because it enters the law of motion of $v_t$, and $y_{t-1}$ is a state because it enters the Taylor rule. The policy is $\left(k(s_t), l(s_t), \Pi(s_t), g_1(s_t)\right)$.
 
 \section{Conclusion}\label{sec:conclusion}
 
@@ -352,7 +383,7 @@ $\alpha$ & Capital share & $1/3$ \\
 $\delta$ & Depreciation rate & $0.025$ \\
 $\eta$ & Inverse Frisch elasticity & $1.0$ \\
 $\phi$ & Labor disutility scale & set so that $l_{ss} = 1$ \\
-$\epsilon$ & Elasticity of substitution across varieties & $10.0$ \\
+$\epsilon$ & Elasticity of substitution across intermediate goods & $10.0$ \\
 $\psi$ & Rotemberg adjustment cost & $100.0$ \\
 $\chi$ & Inflation indexation in the price target & $0.25$ \\
 $\Pi$ & Gross inflation target & $1.005$ \\
@@ -366,6 +397,34 @@ $\sigma_m$ & Standard deviation of the monetary policy shock & $0.001$ \\
 \end{tabular}
 \caption{Baseline calibration of the New Keynesian model with Rotemberg pricing.}
 \label{tab:calib-nk-rotemberg}
+\end{table}
+
+\Cref{tab:calib-nk-calvo} reports the baseline calibration of the New Keynesian model with Calvo pricing. As before, $\phi$ is calibrated so that $l_{ss} = 1$.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{llc}
+\toprule
+Parameter & Description & Value \\
+\midrule
+$\beta$ & Discount factor & $0.99$ \\
+$\alpha$ & Capital share & $1/3$ \\
+$\delta$ & Depreciation rate & $0.025$ \\
+$\eta$ & Inverse Frisch elasticity & $1.0$ \\
+$\phi$ & Labor disutility scale & set so that $l_{ss} = 1$ \\
+$\epsilon$ & Elasticity of substitution across intermediate goods & $10.0$ \\
+$\theta$ & Probability of not resetting the price & $0.8$ \\
+$\Pi$ & Gross inflation target & $1.005$ \\
+$\gamma_\Pi$ & Taylor rule response to inflation & $2.0$ \\
+$\gamma_{\Delta y}$ & Taylor rule response to output growth & $0.5$ \\
+$\rho$ & Persistence of the productivity shock & $0.95$ \\
+$\sigma_z$ & Standard deviation of the productivity shock & $0.007$ \\
+$\rho_m$ & Persistence of the monetary policy shock & $0.9$ \\
+$\sigma_m$ & Standard deviation of the monetary policy shock & $0.001$ \\
+\bottomrule
+\end{tabular}
+\caption{Baseline calibration of the New Keynesian model with Calvo pricing.}
+\label{tab:calib-nk-calvo}
 \end{table}
 
 \newpage
